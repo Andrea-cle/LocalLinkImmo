@@ -30,7 +30,7 @@ const App = () => {
         <main>
           <Admin />
           <Routes>
-            {/* Je suis un test push */}
+            {/* Hello retest */}
             <Route
               path={APP_ROUTES.SIGN_UP}
               element={
