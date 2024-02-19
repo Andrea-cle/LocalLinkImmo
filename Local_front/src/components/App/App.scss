@@ -1,0 +1,42 @@
+@use "../../styles/mixins" as mxn;
+
+.title-wrapper {
+  @include mxn.title;
+  margin-bottom: 2rem;
+}
+
+h1 {
+  font-size: var(--font-size-xxl);
+}
+
+h2 {
+  font-size: var(--font-size-xl);
+}
+
+main {
+  max-width: 1000px;
+  margin: 0 auto;
+  background: url(../../banner.jpg) no-repeat left/cover fixed;
+  background-size: 1000px 1000px;
+
+  @media screen and (min-width: 767px) {
+    background: url(../../assets/banner.jpg) no-repeat 60% 150px / contain fixed;
+  }
+}
+
+.user,
+.doc,
+.home,
+.contact,
+.socialmedia {
+  @include mxn.container;
+  padding-bottom: var(--padding-m);
+}
+
+section:nth-child(even) {
+  padding-bottom: var (--secondary-50);
+}
+
+section:last-of-type {
+  padding-bottom: var(--padding-1);
+}
