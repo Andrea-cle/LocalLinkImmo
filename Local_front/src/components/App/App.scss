@@ -27,8 +27,7 @@ main {
 .user,
 .doc,
 .home,
-.contact,
-.socialmedia {
+.contact {
   @include mxn.container;
   padding-bottom: var(--padding-m);
 }

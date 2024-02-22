@@ -8,7 +8,7 @@ import Button from "../Button/Button";
 // import Contact from "../Contact/Contact";
 // import Footer from "../Footer/Footer";
 // import Header from "../Header/Header";
-// import HeaderNav from "../HeaderNav/HeaderNav";
+import Navbar from "../Navbar/Navbar";
 // import Input from "../Input/Input";
 // import SignIn from "../SignIn/SignIn";
 // import SignUp from "../SignUp/SignUp";
