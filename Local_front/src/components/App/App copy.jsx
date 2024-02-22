@@ -4,15 +4,15 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import "./App.scss";
 import Banner from "../Banner/Banner";
-import Button from "../Button/Button";
+// import Button from "../Button/Button";
 // import Contact from "../Contact/Contact";
 // import Footer from "../Footer/Footer";
-// import Header from "../Header/Header";
+import Header from "../Header/Header";
 import Navbar from "../Navbar/Navbar";
 // import Input from "../Input/Input";
 // import SignIn from "../SignIn/SignIn";
 // import SignUp from "../SignUp/SignUp";
-// import SocialMedia from "../SocialMedia/SocialMedia";
+import Home from "../Home/Home";
 // import User from "../User/User";
 
 const App = () => {
@@ -28,7 +28,6 @@ const App = () => {
       <BrowserRouter>
         <Header />
         <main>
-          <Admin />
           <Routes>
             {/* Hello retest */}
             <Route
@@ -56,20 +55,20 @@ const App = () => {
               element={
                 <>
                   <Banner />
-                  <section className="articles">
-                    <HomeArticles />
+                  <section className="documents">
+                    <HomeDocuments />
                   </section>
                   <section id="contact" className="contact">
                     <Contact />
                   </section>
-                  <section className="socialmedia">
-                    <SocialMedia />
+                  <section className="Home">
+                    <Home />
                   </section>
                 </>
               }
             />
             <Route
-              path={APP_ROUTES.ACCOUNT}
+              path={APP_ROUTES.USER}
               element={
                 <>
                   <User email={"andrea@gmail.com"} />

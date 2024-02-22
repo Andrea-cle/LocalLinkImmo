@@ -4,10 +4,40 @@
   flex-direction: #{$direction};
 }
 
+@mixin header {
+  width: 100%;
+  padding: 36px 0 15px;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
 @mixin grow($size: 1) {
   flex-shrink: 0;
   flex-basis: 0%;
   flex-grow: #{$size};
+}
+
+@mixin navbar {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: 99;
+  background: #ffffff;
+  -webkit-box-shadow: 0 -18px 60px rgba(29, 29, 36, 0.03),
+    -4px 13px rgba(9, 25, 69, 0.07);
+  box-shadow: -18px 60px rgba(29, 29, 36, 0.03), -4px 13px rgba(9, 25, 69, 0.07);
+  border-radius: 10px 10px 0 0;
+}
+
+@mixin menu {
+  display: -webkit-box;
+  display: -ms-flexbox;
 }
 
 @mixin container($width: "1000px", $padding: var(--padding-s)) {
@@ -67,7 +97,7 @@
   justify-content: start;
 
   &::after {
-    content: url(../../assets/Paw.);
+    content: url(../../assets/banner.jpg);
     grid-area: 1/1;
     width: calc(1.3rem + 0.6vmin);
     justify-self: end;

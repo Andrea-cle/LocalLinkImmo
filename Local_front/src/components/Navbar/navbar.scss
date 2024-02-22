@@ -1,0 +1,10 @@
+@use "../../styles/mixins" as mxn;
+
+.navbar-control-mb {
+    @include mxn.navbar;
+height: 100vh;
+min-height: 600px;
+max-height : 950px;
+width: 100%,
+background: url(../..)
+}
