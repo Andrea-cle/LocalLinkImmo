@@ -22,19 +22,6 @@
   flex-grow: #{$size};
 }
 
-@mixin navbar {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  z-index: 99;
-  background: #ffffff;
-  -webkit-box-shadow: 0 -18px 60px rgba(29, 29, 36, 0.03),
-    -4px 13px rgba(9, 25, 69, 0.07);
-  box-shadow: -18px 60px rgba(29, 29, 36, 0.03), -4px 13px rgba(9, 25, 69, 0.07);
-  border-radius: 10px 10px 0 0;
-}
-
 @mixin menu {
   display: -webkit-box;
   display: -ms-flexbox;

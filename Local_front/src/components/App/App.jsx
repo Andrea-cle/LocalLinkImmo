@@ -3,16 +3,16 @@ import { APP_ROUTES } from "../../constants/route.const.js";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import "./App.scss";
-import Banner from "../Banner/Banner";
+import Banner from "../Banner/Banner.jsx";
 // import Button from "../Button/Button";
 // import Contact from "../Contact/Contact";
 // import Footer from "../Footer/Footer";
-import Header from "../Header/Header";
-import Navbar from "../Navbar/Navbar";
+import Header from "../Header/Header.jsx";
+import Navbar from "../Navbar/Navbar.jsx";
 // import Input from "../Input/Input";
 // import SignIn from "../SignIn/SignIn";
 // import SignUp from "../SignUp/SignUp";
-import Home from "../Home/Home";
+import Home from "../Home/Home.jsx";
 // import User from "../User/User";
 
 const App = () => {
