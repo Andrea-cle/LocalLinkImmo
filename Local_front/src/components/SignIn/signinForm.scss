@@ -1,0 +1,6 @@
+@use "../../styles/mixins" as mxn;
+
+.sign-up-form {
+  @include mxn.flex("column", "nowrap");
+  gap: 32px;
+}
