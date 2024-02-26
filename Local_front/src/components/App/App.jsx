@@ -13,12 +13,13 @@ import Input from "../Input/Input";
 import SignIn from "../SignIn/SignInForm.jsx";
 import SignUp from "../SignUp/SignUp";
 import Home from "../Home/Home.jsx";
-// import User from "../User/User";
+import Documents from "../Documents/Documents.jsx";
+
 
 const App = () => {
   const dispatch = useDispatch();
 
-  //
+ 
   useEffect(() => {
     dispatch(getArticleThunk());
   }, []);
@@ -78,11 +79,12 @@ const App = () => {
             <Route
               path={"*"}
               element={
-                <main style={{ padding: "1rem" }}>
-                  <h1>Oops !</h1>
+               <>
+               <h1>Oops !</h1>
                   <em>Erreur : 404</em>
                   <p>cette page n'existe pas.</p>
-                </main>
+                 </>
+                  
               }
             />
           </Routes>
