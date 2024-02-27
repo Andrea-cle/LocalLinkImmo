@@ -1,12 +1,17 @@
-import { APP_ROUTES } from "../../constants/route.const";
 import React from "react";
+import "./header.scss";
 
+// Permet de gérer l'entête de la page d'accueil
 const Header = () => {
   return (
-    <header>
-      <div className="logo">Mon Logo</div>
-      <h1>Local Link Immo </h1>
-      <p> site d'autogestion de biens immobiliers</p>
+    <header className="header">
+      <div className="logo">
+        <img src="/home.png" alt="Logo de Local Link Immo" />
+      </div>
+      <div className="header_content">
+        <h1>Local Link Immo </h1>
+        <h3> site d'autogestion de vos propres biens immobiliers</h3>
+      </div>
     </header>
   );
 };

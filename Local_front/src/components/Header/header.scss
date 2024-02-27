@@ -1,0 +1,23 @@
+@use "../../styles/mixins" as mxn;
+
+.header {
+  @include mxn.header;
+
+  .logo {
+    height: auto;
+  }
+  &_content {
+    flex-grow: 1;
+    margin-left: 20px;
+
+    h1 {
+      text-align: center;
+      font-size: 24px;
+      margin-bottom: 5px;
+    }
+    h3 {
+      font-size: 14px;
+      text-align: justify;
+    }
+  }
+}

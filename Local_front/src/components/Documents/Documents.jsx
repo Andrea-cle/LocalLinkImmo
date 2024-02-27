@@ -9,7 +9,7 @@ return(
             <h1>Documents</h1>
             <a className="btn" href={APP_ROUTES.DOC}>Liste des documents</a> 
 <ul>
-    {Documents.map((document) =>
+    {documents.map((document) =>
     <li key={document.id}> {document.name} </li>)
     };
 </ul>

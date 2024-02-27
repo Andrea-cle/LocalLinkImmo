@@ -10,7 +10,7 @@ const Navbar = () => {
             <ul className="menu">
               <li className="active">
                 <a href="/home/">
-                  <FontAwesomeIcon icon="fa-solid fa-house" />
+                <FontAwesomeIcon icon="fa-solid fa-house" />
                   HOME
                 </a>
               </li>

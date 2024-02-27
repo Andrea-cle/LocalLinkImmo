@@ -6,11 +6,12 @@
   min-height: 600px;
   max-height: 950px;
   width: 100%;
-  background: url(../../assets/banner.jpg) no-repeat left -350px top 80px;
+  background : linear-gradient(162.72deg, #01D887 8.19%, #3ABAC2 44,72%, #3D44C9 91,7%);
   background-size: 900px;
 
   @media screen and (min-width: 767px) {
     background-position: left -280px top 120px;
+    background : linear-gradient(162.72deg, #01D887 8.19%, #3ABAC2 44,72%, #3D44C9 91.7%);
   }
 
   &_header{
@@ -18,8 +19,5 @@
     @include mxn.flex("column", "nowrap");
   margin-bottom: 3rem;
   }
-
-  // &_logo{
-
-  // }
+ 
 }
