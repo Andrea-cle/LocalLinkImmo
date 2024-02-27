@@ -1,5 +1,4 @@
 import { APP_ROUTES } from "../../constants/route.const";
-// import Button from "../Button/Button";
 import "./banner.scss";
 
 const Banner = () => {

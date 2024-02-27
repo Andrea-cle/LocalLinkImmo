@@ -1,4 +1,6 @@
 import "./input.scss";
+import { useState } from "react";
+
 const Input = (props) => {
   const { id, type, label, value, required, onChange } = props;
   const handleChange = (value) => {

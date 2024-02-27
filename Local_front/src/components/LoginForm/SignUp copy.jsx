@@ -3,7 +3,6 @@ import Input from "../Input/Input";
 import Button from "../Button/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { updateSignUpForm } from "../../redux/reducers/user.reducer";
-import { signUpThunk } from "../../api/user.api";
 import { APP_ROUTES } from "../../constants/route.const";
 import { switchRoute } from "../../redux/reducers/route.reducer";
 const SignUpForm = (props) => {
@@ -13,9 +12,7 @@ const SignUpForm = (props) => {
   });
   const handleSubmit = (e) => {
     e.preventDefault();
-    
-    dispatch(signUpThunk());
-  };
+        };
   const updateForm = (value, inputName) => {
     dispatch(updateSignUpForm({ value, inputName }));
   };
@@ -48,6 +45,8 @@ const SignUpForm = (props) => {
           value={signUpForm.confirmPass}
           onChange={(value) => updateForm(value, "confirmPass")}
         />
+
+        
         <div className="btns">
           <Button
             type={"button"}

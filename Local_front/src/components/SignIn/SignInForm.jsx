@@ -1,21 +1,17 @@
 import "./signinForm.scss";
-import Input from "../Input/Input";
 import Button from "../Button/Button";
-import { useDispatch } from "react-redux";
-import { switchRoute } from "../../redux/reducers/route.reducer";
 import { APP_ROUTES } from "../../constants/route.const";
+
 const SignInForm = (props) => {
-  const dispatch = useDispatch();
-  // const { signUpForm, loading } = useSelector((store) => {
-  //   return store.userState;
-  // });
+ const { signUpForm, loading } = useSelector((store) => {
+   return store.userState;
+  });
   const handleSubmit = (e) => {
     e.preventDefault();
-    // dispatch(signUpThunk(signUpForm));
-    // dispatch(signUpThunk());
+   
   };
   const updateForm = (value, inputName) => {
-    // dispatch(updateSignUpForm({ value, inputName }));
+ 
   };
   const handleRedirect = () => {
     dispatch(switchRoute({ route: APP_ROUTES.SIGN_UP }));
@@ -36,7 +32,8 @@ const SignInForm = (props) => {
           type="password"
           value={""}
           onChange={(value) => updateForm(value, "password")}
-        />
+        />      
+        <select ></select>
         <div className="btns">
           <Button
             type={"button"}
