@@ -7,8 +7,7 @@
     height: auto;
   }
   &_content {
-    flex-grow: 1;
-    margin-left: 20px;
+    // flex-grow: 1;
 
     h1 {
       text-align: center;
@@ -17,7 +16,7 @@
     }
     h3 {
       font-size: 14px;
-      text-align: justify;
+      text-align: center;
     }
   }
 }

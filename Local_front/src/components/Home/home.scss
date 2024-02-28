@@ -1,18 +1,36 @@
 @use "../../styles/mixins" as mxn;
 
-.home{
+.home {
   @include mxn.container;
-  background-color : floralwhite;
   background-size: 900px;
 
   @media screen and (min-width: 767px) {
     background-position: left -280px top 120px;
   }
 
-  &_header{
+  &_header {
     @include mxn.container("650px");
     @include mxn.flex("column", "nowrap");
-  margin-bottom: 3rem;
+    margin-bottom: 3rem;
   }
- 
+
+  nav ul {
+    display: flex;
+    justify-content: space-around;
+    padding: 30px;
+  }
+
+  nav a {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    align-items: center;
+    font-size: 14px;
+  }
+
+  article {
+    p {
+      text-align: justify;
+    }
+  }
 }

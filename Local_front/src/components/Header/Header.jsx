@@ -10,7 +10,7 @@ const Header = () => {
       </div>
       <div className="header_content">
         <h1>Local Link Immo </h1>
-        <h3> site d'autogestion de vos propres biens immobiliers</h3>
+        <h3> Site d'autogestion de vos propres biens immobiliers</h3>
       </div>
     </header>
   );

@@ -1,32 +1,60 @@
 import { APP_ROUTES } from "../../constants/route.const";
-import React from 'react';
+import React from "react";
 import "./home.scss";
 
 const Home = () => {
   return (
     <section className="home">
       <div className="home_navigate">
-        
         <nav>
-        <ul>
-
-         <li><a href="#">
-         <i className="fa-solid fa-house" />
-          Accueil
-          </a>
-          </li>
-         <li> <a href="#">
-         <i className="fa-solid fa-right-to-bracket" />
-          Utilisateur
-          </a>
-          </li>
-         <li> <a href="#">
-         <i className="fa-solid fa-keyboard" />
-          Contacts</a></li>
+          <ul>
+            <li>
+              <a href="#">
+                <i className="fa-solid fa-house" />
+                Accueil
+              </a>
+            </li>
+            <li>
+              {" "}
+              <a href="#">
+                <i className="fa-solid fa-right-to-bracket" />
+                Utilisateur
+              </a>
+            </li>
+            <li>
+              {" "}
+              <a href="#">
+                <i className="fa-solid fa-keyboard" />
+                En savoir plus
+              </a>
+            </li>
           </ul>
         </nav>
-        <h3>Bienvenue sur notre site !</h3>
-        <p>Autogérer vous même vos propres biens immobiliers pour une meilleure visibilité</p>
+        <article>
+          <p>
+            "Notre site offre une expérience inégalée, mettant le pouvoir entre
+            les mains des propriétaires tout en simplifiant chaque aspect de la
+            gestion quotidienne des biens immobiliers.
+            <p>
+              Que vous soyez propriétaire ou locataire, notre plateforme
+              intuitive vous permet de gérer efficacement tous les aspects de
+              vos biens immobiliers. Fini les tracas administratifs et les
+              pertes de temps !
+            </p>
+            Grâce à notre interface conviviale, vous pouvez effectuer toutes vos
+            tâches en quelques clics, où que vous soyez et à tout moment. Pour
+            les propriétaires, notre site offre une suite complète d'outils de
+            gestion, y compris la gestion des loyers, la communication avec les
+            locataires, le suivi des dépenses et des revenus, ainsi que des
+            rapports détaillés pour une transparence totale. Pour les
+            locataires, l'accès à un tableau de bord personnalisé facilite la
+            communication avec les propriétaires, la gestion des paiements et la
+            résolution des problèmes, offrant ainsi une expérience de location
+            fluide et sans stress.<br></br>
+            Découvrez dès aujourd'hui notre plateforme et prenez le contrôle de
+            vos biens immobiliers comme jamais auparavant !"
+          </p>
+        </article>
       </div>
     </section>
   );

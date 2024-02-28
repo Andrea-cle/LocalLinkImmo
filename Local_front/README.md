@@ -14,7 +14,7 @@ Installation
 1.Clonez ce dépôt sur votre machine
 git clone https://github.com/Andrea-cle/LocalLinkImmo.git
 
-npm install @reduxjs/toolkit react react-dom react-redux react-router-dom sass @types/react vite fontawesome
+npm install @reduxjs/toolkit react react-dom react-redux react-router-dom sass @types/react vite fontawesome formidable
 
 exemple: Executez la commande telnet mapscii.me pour commencer ensuite [...]
 

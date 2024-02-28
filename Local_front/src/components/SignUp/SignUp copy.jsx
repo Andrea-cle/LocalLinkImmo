@@ -4,7 +4,7 @@ import Button from "../Button/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { updateSignUpForm } from "../../redux/reducers/user.reducer";
 import { APP_ROUTES } from "../../constants/route.const";
-import { switchRoute } from "../../redux/reducers/route.reducer";
+// import { switchRoute } from "../../redux/reducers/route.reducer";
 const SignUpForm = (props) => {
   const dispatch = useDispatch();
   const { signUpForm, loading, user } = useSelector((store) => {
@@ -12,7 +12,7 @@ const SignUpForm = (props) => {
   });
   const handleSubmit = (e) => {
     e.preventDefault();
-        };
+  };
   const updateForm = (value, inputName) => {
     dispatch(updateSignUpForm({ value, inputName }));
   };
@@ -24,10 +24,7 @@ const SignUpForm = (props) => {
       <div>
         <p>User name: {user.pseudo || ""}</p>
       </div>
-      <form
-        onSubmit={handleSubmit}
-        className="sign-up-form"
-      >
+      <form onSubmit={handleSubmit} className="sign-up-form">
         <Input
           label="Email"
           required={true}
@@ -46,7 +43,6 @@ const SignUpForm = (props) => {
           onChange={(value) => updateForm(value, "confirmPass")}
         />
 
-        
         <div className="btns">
           <Button
             type={"button"}

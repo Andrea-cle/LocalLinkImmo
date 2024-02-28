@@ -3,7 +3,7 @@
 // import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import "./App.scss";
-import Banner from "../Banner/Banner.jsx";
+import Banner from "../Footer/Footer.jsx";
 import Button from "../Button/Button.jsx";
 // import Contact from "../Contact/Contact";
 // import Footer from "../Footer/Footer";
@@ -11,15 +11,13 @@ import Header from "../Header/Header.jsx";
 import Navbar from "../Navbar/Navbar.jsx";
 import Input from "../Input/Input.jsx";
 import LoginForm from "../Login/LoginForm.jsx";
-import SignUp from "../LoginForm/LoginForm.jsx";
+import SignUp from "../SignUp/SignUp.jsx";
 import Home from "../Home/Home.jsx";
 import Documents from "../Documents/Documents.jsx";
-
 
 const App = () => {
   const dispatch = useDispatch();
 
- 
   // useEffect(() => {
   //   dispatch(getArticleThunk());
   // }, []);
@@ -79,12 +77,11 @@ const App = () => {
             <Route
               path={"*"}
               element={
-               <>
-               <h1>Oops !</h1>
+                <>
+                  <h1>Oops !</h1>
                   <em>Erreur : 404</em>
                   <p>cette page n'existe pas.</p>
-                 </>
-                  
+                </>
               }
             />
           </Routes>
