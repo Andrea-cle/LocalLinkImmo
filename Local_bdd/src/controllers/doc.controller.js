@@ -11,11 +11,9 @@ const create = async (req, res) => {
     keepExtensions: true,
     createDirsFromUploads: true,
     filter: (opts) => {
-      const { name, mimetype, originalFilename } = opts;
+      const { mimetype } = opts;
       if (mimetype !== "application/pdf") return false;
       return true;
-
-      // utiliser name et filename
     },
   });
 

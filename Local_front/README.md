@@ -3,7 +3,7 @@ Projet LocalLinkImmo
 Site applicatif d'autogestion par des particuliers de ses propres biens immobiliers
 
 Pour commencer
-Ce projet utilise une stack technologique moderne pour fournir une expérience utilisater dynamique et réactive. Voici comment vous pouvez commencer à travailler avec le code source :
+Ce projet utilise une stack technologique moderne pour fournir une expérience utilisateur dynamique et réactive. Voici comment vous pouvez commencer à travailler avec le code source :
 
 Pré-requis
 
@@ -14,9 +14,14 @@ Installation
 1.Clonez ce dépôt sur votre machine
 git clone https://github.com/Andrea-cle/LocalLinkImmo.git
 
-npm install @reduxjs/toolkit react react-dom react-redux react-router-dom sass @types/react vite fontawesome formidable
+Installez les commandes suivantes dans le terminal avec npm install :
+-init
+-@reduxjs/toolkit
+-react react-dom -react-redux -react-router-dom
+-sass @types/react vite -fontawesome
+-formidable
 
-exemple: Executez la commande telnet mapscii.me pour commencer ensuite [...]
+Ensuite pour démarrer le programme dans le terminal faites npm run dev
 
 Ensuite vous pouvez montrer ce que vous obtenez au final...
 

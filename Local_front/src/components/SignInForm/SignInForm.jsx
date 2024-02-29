@@ -1,27 +1,22 @@
+import React, { useState } from "react";
 import "./signinForm.scss";
 import Button from "../Button/Button";
 import { APP_ROUTES } from "../../constants/route.const";
 
 const SignInForm = (props) => {
- const { signUpForm, loading } = useSelector((store) => {
-   return store.userState;
-  });
+  const [role, setRole] = useState("Locataire");
+
   const handleSubmit = (e) => {
     e.preventDefault();
-   
   };
-  const updateForm = (value, inputName) => {
- 
-  };
+
+  const updateForm = (value, inputName) => {};
   const handleRedirect = () => {
     dispatch(switchRoute({ route: APP_ROUTES.SIGN_UP }));
   };
   return (
     <>
-      <form
-        onSubmit={handleSubmit}
-        className="sign-up-form"
-      >
+      <form onSubmit={handleSubmit} className="sign-up-form">
         <Input
           label="Email"
           value={""}
@@ -32,8 +27,11 @@ const SignInForm = (props) => {
           type="password"
           value={""}
           onChange={(value) => updateForm(value, "password")}
-        />      
-        <select ></select>
+        />
+        <select value={role} onChange={(e) => setRole(e.target.value)}>
+          <option value="tenant">Locataire</option>
+          <option value="owner">Propriétaire</option>
+        </select>
         <div className="btns">
           <Button
             type={"button"}

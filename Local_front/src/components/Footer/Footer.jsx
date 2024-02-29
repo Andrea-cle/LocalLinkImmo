@@ -6,7 +6,9 @@ const Footer = () => {
     <>
       <section className="footer">
         <div className="footer-content">
-          <p>Contactez-nous : andrea@gmail.com</p>
+          <p>
+            <a href="*">Contactez-nous</a>
+          </p>
           <div className="footer-navigate">
             <ul>
               <li>

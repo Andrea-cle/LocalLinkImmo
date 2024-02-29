@@ -19,4 +19,18 @@
       text-align: center;
     }
   }
+
+  nav ul {
+    display: flex;
+    justify-content: space-around;
+    padding: 30px;
+  }
+
+  nav a {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    align-items: center;
+    font-size: 14px;
+  }
 }

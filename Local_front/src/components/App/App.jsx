@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { APP_ROUTES } from "../../constants/route.const";
 // import { useState } from "react";
@@ -6,7 +6,8 @@ import "./App.scss";
 import Header from "../Header/Header";
 import Home from "../Home/Home";
 import Footer from "../Footer/Footer";
-import LoginForm from "../SignUp/SignUp";
+import User from "../User/User";
+import SignUp from "../SignUp/SignUp";
 
 const App = () => {
   return (
@@ -29,14 +30,14 @@ const App = () => {
               }
             />
             <Route
-              path={APP_ROUTES.SIGN_UP}
+              path={APP_ROUTES.USER}
               element={
-                <section className="sign-up">
-                  <SignUp />
+                <section className="utilisateur">
+                  <User />
                 </section>
               }
             />
-            <Route
+            {/* <Route
               path={"*"}
               element={
                 <>
@@ -45,7 +46,7 @@ const App = () => {
                   <p>Cette page n'existe pas.</p>
                 </>
               }
-            />
+            /> */}
           </Routes>
         </main>
         <Footer />

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import signUp from "./SignUp copy";
+import Input from "../Input/Input";
+import "./signUp.scss";
 
 const SignUp = () => {
   // State pour stocker les valeurs des champs
@@ -37,7 +38,7 @@ const SignUp = () => {
       message.err("Les mots de passes ne correspondent pas");
       return;
     }
-
+  };
   return (
     <>
       <div>
@@ -96,5 +97,4 @@ const SignUp = () => {
     </>
   );
 };
-
 export default SignUp;

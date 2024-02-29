@@ -12,6 +12,30 @@ const Header = () => {
         <h1>Local Link Immo </h1>
         <h3> Site d'autogestion de vos propres biens immobiliers</h3>
       </div>
+      <section className="home_navigate">
+        <nav>
+          <ul>
+            <li>
+              <a href="#">
+                <i className="fa-solid fa-house" />
+                Accueil
+              </a>
+            </li>
+            <li>
+              <a href="#utilisateur ">
+                <i className="fa-solid fa-right-to-bracket" />
+                Utilisateur
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i className="fa-solid fa-keyboard" />
+                En savoir plus
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </section>
     </header>
   );
 };
