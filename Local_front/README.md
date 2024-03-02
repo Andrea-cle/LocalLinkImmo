@@ -20,6 +20,7 @@ Installez les commandes suivantes dans le terminal avec npm install :
 -react react-dom -react-redux -react-router-dom
 -sass @types/react vite -fontawesome
 -formidable
+-formik (pour gérer les formulaire)
 
 Ensuite pour démarrer le programme dans le terminal faites npm run dev
 

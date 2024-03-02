@@ -1,4 +1,3 @@
-import { APP_ROUTES } from "../../constants/route.const";
 import React from "react";
 import "./home.scss";
 

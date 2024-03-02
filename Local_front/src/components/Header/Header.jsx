@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./header.scss";
 
 // Permet de gérer l'entête de la page d'accueil
@@ -16,22 +17,22 @@ const Header = () => {
         <nav>
           <ul>
             <li>
-              <a href="#">
+              <Link to="/">
                 <i className="fa-solid fa-house" />
                 Accueil
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#utilisateur ">
+              <Link to="/user">
                 <i className="fa-solid fa-right-to-bracket" />
                 Utilisateur
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#">
+              <Link to="/contact">
                 <i className="fa-solid fa-keyboard" />
                 En savoir plus
-              </a>
+              </Link>
             </li>
           </ul>
         </nav>

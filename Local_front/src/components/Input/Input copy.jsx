@@ -8,7 +8,10 @@ const Input = (props) => {
   };
   return (
     <div className="input__container">
-      <label className="input__label" htmlFor={id}>
+      <label
+        className="input__label"
+        htmlFor={id}
+      >
         {label || "Input label"}
       </label>
       <input
@@ -17,7 +20,7 @@ const Input = (props) => {
         className="input"
         value={value || ""}
         required={required}
-        type={type === "password" ? "password" : "text"}
+        type={type || "text"}
         onChange={(e) => handleChange(e.target.value)}
       />
     </div>

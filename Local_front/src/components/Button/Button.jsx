@@ -1,6 +1,17 @@
 import "./button.scss";
 
 const Button = (props) => {
-  return <button></button>;
+  const { onClick, text, type, disabled } = props;
+
+  return (
+    <button
+      type={type || "button"}
+      disabled={disabled}
+      className="button"
+      onClick={onClick}
+    >
+      {text}
+    </button>
+  );
 };
 export default Button;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import SignUp from "../SignUp/SignUp";
 import SignInForm from "../SignInForm/SignInForm";
-import Button from "../Button/Button";
+import "./user.scss";
 
 const User = () => {
   return (
@@ -12,10 +12,9 @@ const User = () => {
       <div className="connexion">
         <h3>connexion</h3>
         <SignInForm />
-        <Button />
       </div>
       <div className="inscription">
-        <h3>Inscritpion</h3>
+        <h3>Inscription</h3>
         <SignUp />
       </div>
     </section>

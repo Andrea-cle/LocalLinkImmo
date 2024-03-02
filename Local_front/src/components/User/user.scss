@@ -1,0 +1,17 @@
+.user {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  .connexion {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+  }
+
+  .inscription {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+  }
+}

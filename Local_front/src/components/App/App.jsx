@@ -15,16 +15,13 @@ const App = () => {
       <BrowserRouter>
         <Header />
         <main>
-          <section className="home">
-            <Home />
-          </section>
           <Routes>
             <Route
               path={APP_ROUTES.HOME}
               element={
                 <>
-                  <section className="header">
-                    <Header />
+                  <section className="home">
+                    <Home />
                   </section>
                 </>
               }
@@ -37,8 +34,31 @@ const App = () => {
                 </section>
               }
             />
-            {/* <Route
-              path={"*"}
+            <Route
+              path={APP_ROUTES.SIGN_UP}
+              element={
+                <section className="Inscription">
+                  <SignUp />
+                </section>
+              }
+            />
+            <Route
+              path={APP_ROUTES.SIGN_UP}
+              element={
+                <section className="Connexion">
+                  <SignUp />
+                </section>
+              }
+              path={APP_ROUTES.DOC}
+              element={
+                <section className="Tableau de bord">
+                  <Document />
+                </section>
+              }
+            />
+
+            <Route
+              path={APP_ROUTES.DOC}
               element={
                 <>
                   <h1>Oops !</h1>
@@ -46,7 +66,15 @@ const App = () => {
                   <p>Cette page n'existe pas.</p>
                 </>
               }
-            /> */}
+            />
+            <Route
+              path={APP_ROUTES.SIGN_UP}
+              element={
+                <section className="Connexion">
+                  <User />
+                </section>
+              }
+            />
           </Routes>
         </main>
         <Footer />

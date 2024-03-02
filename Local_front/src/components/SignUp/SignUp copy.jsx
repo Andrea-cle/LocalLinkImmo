@@ -4,7 +4,8 @@ import Button from "../Button/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { updateSignUpForm } from "../../redux/reducers/user.reducer";
 import { APP_ROUTES } from "../../constants/route.const";
-// import { switchRoute } from "../../redux/reducers/route.reducer";
+import { switchRoute } from "../../redux/reducers/route.reducer";
+
 const SignUpForm = (props) => {
   const dispatch = useDispatch();
   const { signUpForm, loading, user } = useSelector((store) => {

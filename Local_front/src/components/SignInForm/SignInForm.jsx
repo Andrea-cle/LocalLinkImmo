@@ -1,51 +1,49 @@
-import React, { useState } from "react";
-import "./signinForm.scss";
+import { useState } from "react";
+import Input from "../Input/Input";
 import Button from "../Button/Button";
-import { APP_ROUTES } from "../../constants/route.const";
+import "./signinForm.scss";
 
 const SignInForm = (props) => {
-  const [role, setRole] = useState("Locataire");
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // Logique de soumission du formulaire
   };
 
-  const updateForm = (value, inputName) => {};
-  const handleRedirect = () => {
-    dispatch(switchRoute({ route: APP_ROUTES.SIGN_UP }));
+  const updateForm = (value, inputName) => {
+    setForm({
+      ...form,
+      [inputName]: value,
+    });
   };
+
   return (
     <>
-      <form onSubmit={handleSubmit} className="sign-up-form">
+      <form onSubmit={handleSubmit} className="signinform">
         <Input
           label="Email"
-          value={""}
+          required={true}
+          value={form.email}
           onChange={(value) => updateForm(value, "email")}
         />
         <Input
           label="Mot de passe"
           type="password"
-          value={""}
+          required={true}
+          value={form.password}
           onChange={(value) => updateForm(value, "password")}
         />
-        <select value={role} onChange={(e) => setRole(e.target.value)}>
-          <option value="tenant">Locataire</option>
-          <option value="owner">Propriétaire</option>
-        </select>
+
         <div className="btns">
-          <Button
-            type={"button"}
-            text={"Creer son compte"}
-            onClick={handleRedirect}
-          />
-          <Button
-            type={"submit"}
-            text={"Valider"}
-            color={"var(--green-light)"}
-          />
+          <Button type={"submit"} text={"Valider"} color={"var(--primary)"} />
         </div>
       </form>
     </>
   );
 };
+
 export default SignInForm;
