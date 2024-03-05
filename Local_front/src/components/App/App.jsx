@@ -1,13 +1,14 @@
-// import React from "react";
+import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { APP_ROUTES } from "../../constants/route.const";
-// import { useState } from "react";
 import "./App.scss";
 import Header from "../Header/Header";
 import Home from "../Home/Home";
 import Footer from "../Footer/Footer";
 import User from "../User/User";
 import SignUp from "../SignUp/SignUp";
+import SignInForm from "../SignInForm/SignInForm";
+import Dashboard from "../Dashboard/Dashboard";
 
 const App = () => {
   return (
@@ -43,21 +44,23 @@ const App = () => {
               }
             />
             <Route
-              path={APP_ROUTES.SIGN_UP}
+              path={APP_ROUTES.SIGN_IN}
               element={
                 <section className="Connexion">
-                  <SignUp />
+                  <SignInForm />
                 </section>
               }
-              path={APP_ROUTES.DOC}
+            />
+            <Route
+              path={APP_ROUTES.DASHBOARD}
               element={
-                <section className="Tableau de bord">
-                  <Document />
+                <section className="Tableau_bord">
+                  <Dashboard />
                 </section>
               }
             />
 
-            <Route
+            {/* <Route
               path={APP_ROUTES.DOC}
               element={
                 <>
@@ -66,15 +69,7 @@ const App = () => {
                   <p>Cette page n'existe pas.</p>
                 </>
               }
-            />
-            <Route
-              path={APP_ROUTES.SIGN_UP}
-              element={
-                <section className="Connexion">
-                  <User />
-                </section>
-              }
-            />
+            /> */}
           </Routes>
         </main>
         <Footer />

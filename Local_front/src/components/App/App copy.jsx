@@ -57,11 +57,8 @@ const App = () => {
                   <section className="documents">
                     <Documents />
                   </section>
-                  {/* <section id="contact" className="contact">
+                  <section id="contact" className="contact">
                     <Contact />
-                  </section> */}
-                  <section className="Home">
-                    <Home />
                   </section>
                 </>
               }

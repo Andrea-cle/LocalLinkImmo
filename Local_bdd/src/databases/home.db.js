@@ -22,14 +22,16 @@ const createOneHome = async (userId, address) => {
   }
 };
 
-// Lecture des logements d'un user
+// Lecture des logements d'un user c'est pour le proprio
 const readAllByOneUser = async (id) => {
   const sql = `
-    SELECT id, address
-    FROM home
+    SELECT home.id AS home_id, home.address, user.id AS user_id
+    FROM user
     JOIN user_home
-    ON user_id.home_id = home.home_id
-    WHERE user_id = ?
+    ON user.id = user_home.user_id
+    JOIN home
+    ON home.id=user_home.home_id
+    WHERE user.id = ?
     `;
 
   let result = null;

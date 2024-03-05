@@ -1,17 +1,29 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Input from "../Input/Input";
 import Button from "../Button/Button";
 import "./signinForm.scss";
+import { APP_ROUTES } from "../../constants/route.const";
+import setLocalStorageItem from "../../Utils/utils";
 
-const SignInForm = (props) => {
+const SignInForm = () => {
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
 
-  const handleSubmit = (e) => {
+  const navigate = useNavigate(); // Utilisation de useNavigate pour la navigation
+
+  useEffect(() => {
+    if (localStorage.getItem("user")) {
+      navigate(APP_ROUTES.DASHBOARD, { replace: true });
+    }
+  }, [navigate]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Logique de soumission du formulaire
+    setLocalStorageItem("user", { email: form.email, connected: true });
+    navigate(APP_ROUTES.DASHBOARD, { replace: true });
   };
 
   const updateForm = (value, inputName) => {
@@ -23,7 +35,7 @@ const SignInForm = (props) => {
 
   return (
     <>
-      <form onSubmit={handleSubmit} className="signinform">
+      <form onSubmit={handleSubmit} className="sign-in-form">
         <Input
           label="Email"
           required={true}
@@ -37,9 +49,12 @@ const SignInForm = (props) => {
           value={form.password}
           onChange={(value) => updateForm(value, "password")}
         />
-
         <div className="btns">
-          <Button type={"submit"} text={"Valider"} color={"var(--primary)"} />
+          <Button
+            type={"submit"}
+            text={"Se connecter"}
+            color={"var(--primary)"}
+          />
         </div>
       </form>
     </>

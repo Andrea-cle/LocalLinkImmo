@@ -1,5 +1,7 @@
 import { HomeDB } from "../databases/home.db.js";
-import { areStringsFilled } from "../utils.string.utils.js";
+import { areStringsFilled } from "../utils/string.utils.js";
+import { UserDB } from "../databases/user.db.js";
+
 
 // Creation d'un logement
 const create = async ({ body: { address, userId } }, res) => {
@@ -15,9 +17,9 @@ const create = async ({ body: { address, userId } }, res) => {
     .json({ message: error ? error : `New home successfully created`, result });
 };
 
-//  creation d'un user du logement
+//  creation of home user
 const createUser = async ({ body: { address, userId } }, res) => {
-  const user = await readOne(userId);
+  const user = await UserDB.readOne(userId);
   if (user.role === `Tenant`)
     return res
       .status(403)
@@ -50,7 +52,7 @@ const deleteHome = async ({ params: { id } }, res) => {
     .json({ message: error ? error : `Your home has been erased`, result });
 };
 
-export const homeController = {
+export const HomeController = {
   create,
   createUser,
   readUserId,

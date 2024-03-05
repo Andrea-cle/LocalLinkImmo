@@ -10,7 +10,7 @@ const User = () => {
         <h2>Espace utilisateur</h2>
       </div>
       <div className="connexion">
-        <h3>connexion</h3>
+        <h3>Connexion</h3>
         <SignInForm />
       </div>
       <div className="inscription">

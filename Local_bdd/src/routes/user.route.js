@@ -10,14 +10,14 @@ const initUserRoutes = (app) => {
 
   // POST
   userRouter.post("/", UserController.createOneUser);
-  userRouter.post("/user/add_tenant", UserController.addTenant);
+  userRouter.post("/user/add_tenant", UserController.addTenant); 
   userRouter.post("/sign-in", UserController.signIn);
 
   // PUT
   userRouter.put("/password", jwtMddlwr, UserController.updatePassword);
 
   // DELETE
-  userRouter.delete("/:id", jwtMddlwr, UserController, deleteUserAndAllData);
+  userRouter.delete("/:id", jwtMddlwr, UserController.deleteUserAndAllData); 
 
   // lié le router à /user
   app.use("/user", userRouter);

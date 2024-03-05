@@ -14,6 +14,7 @@ const getRequest = async (url, token) => {
 
 const postRequest = async (url, body = {}, token) => {
   const config = {
+    method:"POST", 
     body: body instanceof FormData ? body : JSON.stringify(body),
     headers:
       body instanceof FormData
@@ -43,4 +44,30 @@ const request = async (url, config) => {
   }
 };
 
-export { getRequest, postRequest };
+const deleteRequest = async (url, token)=>{
+  const config={
+    method:"DELETE",
+    headers: { "Content-type": "application/json; charset=UTF-8" },
+  }
+  if (token) config.headers.Authorization=token;
+
+  return await request(url, config);
+};
+
+const putRequest = async(url, body ={}, token)=>{
+  const config ={
+    method:"PUT",
+    body: body instanceof FormData ? Body : JSON.stringify(body),
+    headers:
+    body instanceof FormData
+    ? {} : { "Content-type": "application/json; charset=UTF-8" },
+  };
+  if (token) config.headers.Authorization = token;
+
+  return await request(url,config);
+}
+
+export { getRequest, postRequest, deleteRequest, putRequest };
+
+
+

@@ -55,7 +55,7 @@ const deleteOne = async ({ params: { doc_id } }, res) => {
   });
 };
 
-export const DocConstroller = {
+export const DocController = {
   create,
   readAllDoc,
   deleteOne,

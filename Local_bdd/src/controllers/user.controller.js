@@ -1,7 +1,7 @@
 import { UserDB } from "../databases/user.db.js";
 import { DocDB } from "../databases/doc.db.js";
 import { HomeDB } from "../databases/home.db.js";
-import isEmail from "validator/lib/isEmail";
+import isEmail from "validator/lib/isEmail.js";
 import { areStringsFilled } from "../utils/string.utils.js";
 import { hashPass, compareHash } from "../utils/crypto.utils.js";
 import { jwtSign } from "../utils/jwt.utils.js";
@@ -13,7 +13,7 @@ const createOneUser = async (
   const areStrings = areStringsFilled([role, email, password, confirmPass]);
   if (!areStrings) return res.status(403).json({ message: `Missing data` });
 
-  if (role !== `owner` || role !== `tenant`)
+  if (role !== `owner` && role !== `tenant`)
     return res.status(403).json({ message: `Invalid Role` });
 
   if (!isEmail(email))
@@ -27,6 +27,7 @@ const createOneUser = async (
       message: `Invalid Password format : must contain atleast 8 characters`,
     });
 
+    // password hashing
   const hashPwResponse = await hashPass(password);
   const hashPwError = hashPwResponse.error;
 
@@ -35,7 +36,7 @@ const createOneUser = async (
   const response = await UserDB.create(role, email, hashPwResponse.hashed);
   const error = response.error;
 
-  if (result.error)
+  if (error)
     return res.status(502).json({ message: "You can't create an account" });
 
   return res
@@ -76,7 +77,7 @@ const signIn = async ({ body: { email, password } }, res) => {
   const user = result[0];
   const userID = user.id;
   const pwBD = user.password;
-  const email = user.email;
+  const userEmail = user.email;
 
   const arePwSame = await compareHash(password, pwBD);
 
@@ -88,7 +89,7 @@ const signIn = async ({ body: { email, password } }, res) => {
   const token = jwtSign(userID);
   return res.status(200).json({
     message: `Authentication succeeded`,
-    user: { userID, email, token },
+    user: { userID, userEmail, token },
   });
 };
 

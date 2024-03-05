@@ -9,7 +9,7 @@ const initDocRoutes = (app) => {
   docRouter.get("/all", DocController.readAllDoc);
 
   // POST
-  docRouter.post("/", jwtMddlwr, create);
+  docRouter.post("/", jwtMddlwr, DocController.create);
 
   // DELETE
   docRouter.delete("/:id", DocController.deleteOne);

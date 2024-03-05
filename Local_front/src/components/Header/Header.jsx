@@ -23,17 +23,15 @@ const Header = () => {
               </Link>
             </li>
             <li>
-              <Link to="/user">
+              <Link to="/sign-up">
                 <i className="fa-solid fa-right-to-bracket" />
-                Utilisateur
+                Inscription
               </Link>
             </li>
-            <li>
-              <Link to="/contact">
-                <i className="fa-solid fa-keyboard" />
-                En savoir plus
-              </Link>
-            </li>
+            <Link to="/login">
+              <i className="fa-solid fa-unlock-keyhole" />
+              Connexion
+            </Link>
           </ul>
         </nav>
       </section>
