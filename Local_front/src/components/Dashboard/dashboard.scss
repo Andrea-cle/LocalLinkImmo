@@ -1,0 +1,49 @@
+.dashboard {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.dashboard h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.dashboard nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dashboard nav ul li {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.dashboard nav ul li a {
+  text-decoration: none;
+  color: #333;
+}
+
+.dashboard nav ul li a:hover {
+  color: #000;
+}
+
+.dashboard h3 {
+  font-size: 20px;
+  margin-top: 20px;
+}
+
+.dashboard ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dashboard ul li {
+  margin-bottom: 10px;
+}
+
+.dashboard ul li:last-child {
+  margin-bottom: 0;
+}

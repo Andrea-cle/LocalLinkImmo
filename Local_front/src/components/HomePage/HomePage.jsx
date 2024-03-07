@@ -1,9 +1,9 @@
 import React from "react";
-import "./home.scss";
+import "./homePage.scss";
 
-const Home = () => {
+const HomePage = () => {
   return (
-    <section className="home">
+    <section className="home-page">
       <h3>Description de notre site</h3>
       <article>
         <p>
@@ -35,4 +35,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomePage;

@@ -4,7 +4,6 @@ import Input from "../Input/Input";
 import Button from "../Button/Button";
 import "./signinForm.scss";
 import { APP_ROUTES } from "../../constants/route.const";
-import setLocalStorageItem from "../../Utils/utils";
 
 const SignInForm = () => {
   const [form, setForm] = useState({
@@ -22,7 +21,13 @@ const SignInForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLocalStorageItem("user", { email: form.email, connected: true });
+    localStorage.setItem(
+      "user",
+      JSON.stringify({
+        email: form.email,
+        connected: true,
+      })
+    );
     navigate(APP_ROUTES.DASHBOARD, { replace: true });
   };
 

@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { APP_ROUTES } from "../../constants/route.const";
 import "./App.scss";
 import Header from "../Header/Header";
-import Home from "../Home/Home";
+import HomePage from "../HomePage/HomePage";
 import Footer from "../Footer/Footer";
 import User from "../User/User";
 import SignUp from "../SignUp/SignUp";
@@ -21,8 +21,8 @@ const App = () => {
               path={APP_ROUTES.HOME}
               element={
                 <>
-                  <section className="home">
-                    <Home />
+                  <section className="home-page">
+                    <HomePage />
                   </section>
                 </>
               }

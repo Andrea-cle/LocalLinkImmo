@@ -25,23 +25,25 @@ const createDoc = async (url, tenantId, homeId, type) => {
 };
 
 // lecture des doc
-const readAllDoc = async (document) => {
+const readAllDoc = async (userId) => {
   const sql = `
-SELECT * FROM documents
-JOIN users_documents
-ON user_id.doc_id = documents.doc_id
-WHERE id= ?`;
+    SELECT * FROM documents
+    JOIN users_documents
+    ON documents.doc_id = users_documents.doc_id
+    WHERE user_id = ?
+  `;
 
   let result = null;
   let error = null;
   try {
-    result = await query(sql, [document]);
+    result = await query(sql, [userId]);
   } catch (err) {
     error = err.message;
   } finally {
     return { error, result };
   }
 };
+
 
 // MAJ des doc
 // const updateDoc = async (document) => {

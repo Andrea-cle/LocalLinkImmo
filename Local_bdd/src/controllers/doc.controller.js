@@ -1,15 +1,22 @@
-import { DocDB } from "../databases/doc.db.js";
-import formidable from "formidable";
+// Importer le module de gestion des doc depuis la base de données
+import { DocDB } from "../databases/doc.db.js"; 
+// Permet le traitement des fichiers
+import formidable from "formidable"; 
 
+// Fonction pour créer les documents
 const create = async (req, res) => {
+
+  // Extrait les paramètres de la requête
   const { type, homeId, tenantId } = req.params;
 
+  // Permet de construie le chemin d'enregistremennt du document
   const url = `./src/documents/${type}/${homeId}/${tenantId}`;
 
   const form = formidable({
     uploadDir: url,
     keepExtensions: true,
     createDirsFromUploads: true,
+    // Filtrer les types de fichiers 
     filter: (opts) => {
       const { mimetype } = opts;
       if (mimetype !== "application/pdf") return false;
@@ -23,9 +30,11 @@ const create = async (req, res) => {
   } catch (err) {
     console.log("err =>", err.message);
   }
+  // Vérifie si un fichier est téléchargé
   if (!files.doc)
     return res.status(415).json({ message: `Unsupported Media Type` });
 
+    // Créer un document dans la base de donnée
   const docResult = await DocDB.createDoc(url, userId, tenantId, homeId);
   const response = docResult.response;
 
@@ -34,16 +43,18 @@ const create = async (req, res) => {
     .json({ message: `Request processed successfully and document created.` });
 };
 
-const readAllDoc = async ({params : { documents }}, res) => {
-  const response = await DocDB.readAllDoc(documents);
+// Permet de lire tous les docs
+const readAllDoc = async ({ params }, res) => {
+  const response = await DocDB.readAllDoc(params.documents);
 
   const { result, error } = response;
 
   return res.status(error ? 500 : 200).json({
-    message: error ? error : `Request on all documents succesful`,
+    message: error ? error : `Request on all documents successful`,
     result,
   });
 };
+
 
 const deleteOne = async ({ params: { doc_id } }, res) => {
   const response = await DocDB.deleteOne(doc_id);

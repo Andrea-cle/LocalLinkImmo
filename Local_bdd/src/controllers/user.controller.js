@@ -84,7 +84,7 @@ const signIn = async ({ body: { email, password } }, res) => {
   if (!arePwSame)
     return res
       .status(401)
-      .jason({ message: `Authentication failed, check mail and password.` });
+      .json({ message: `Authentication failed, check mail and password.` });
 
   const token = jwtSign(userID);
   return res.status(200).json({

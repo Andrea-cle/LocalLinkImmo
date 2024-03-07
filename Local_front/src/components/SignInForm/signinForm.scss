@@ -1,6 +1,6 @@
 @use "../../styles/mixins" as mxn;
 
-.signinform {
+.sign-in-form {
   @include mxn.flex("column", "nowrap");
   gap: 40px;
 }

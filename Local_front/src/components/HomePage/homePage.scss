@@ -1,6 +1,6 @@
 @use "../../styles/mixins" as mxn;
 
-.home {
+.home-page {
   @include mxn.container;
   background-size: 900px;
 
@@ -12,11 +12,5 @@
     @include mxn.container("650px");
     @include mxn.flex("column", "nowrap");
     margin-bottom: 3rem;
-  }
-
-  article {
-    p {
-      text-align: justify;
-    }
   }
 }
