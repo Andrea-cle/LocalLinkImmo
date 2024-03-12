@@ -6,6 +6,8 @@ import { areStringsFilled } from "../utils/string.utils.js";
 import { hashPass, compareHash } from "../utils/crypto.utils.js";
 import { jwtSign } from "../utils/jwt.utils.js";
 
+
+// Créer un nouvel utilisateur
 const createOneUser = async (
   { body: { role, email, password, confirmPass } },
   res
@@ -44,6 +46,7 @@ const createOneUser = async (
     .json({ message: error ? error : `New user successfully created` });
 };
 
+// Ajoute un locataire à un logement
 const addTenant = async ({ body: { userId, tenantId, homeId } }, res) => {
   const user = await readOneTenant(userId);
   const response = await UserDB.addTenant(tenantId, homeId);
@@ -57,6 +60,7 @@ const addTenant = async ({ body: { userId, tenantId, homeId } }, res) => {
     .json({ message: `User create successfully`, user: insertedId });
 };
 
+// Lit un utilisateur par ID
 const readOne = async ({ body: { userID } }, res) => {
   const response = await UserDB.readOne(userID);
   const { result, error } = response;
@@ -67,6 +71,7 @@ const readOne = async ({ body: { userID } }, res) => {
   });
 };
 
+// Authentification de l'utilisateur
 const signIn = async ({ body: { email, password } }, res) => {
   const { result, error } = await UserDB.readByEmail(email);
 
@@ -93,6 +98,7 @@ const signIn = async ({ body: { email, password } }, res) => {
   });
 };
 
+// Met à jour le mot de passe
 const updatePassword = async (
   { body: { oldPassword, newPassword, userID } },
   res
@@ -126,6 +132,7 @@ const updatePassword = async (
     });
 };
 
+// Supprime l'utilisateur et toutes ses données
 const deleteUserAndAllData = async (userId, res) => {
   const userHomes = await HomeDB.getUserHomes(userId);
   const userDoc = await DocDB.getUserDoc(userId);

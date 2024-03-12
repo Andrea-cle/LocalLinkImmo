@@ -10,7 +10,7 @@ const initHomeRoutes = (app) => {
 
   //  POST
   homeRouter.post("/", jwtMddlwr, HomeController.create);
-  homeRouter.post("/homeID", jwtMddlwr, HomeController.createUser);
+  homeRouter.post("/homeID", jwtMddlwr, HomeController.createUserHome);
 
   // DELETE
   homeRouter.delete("/:homeID", HomeController.deleteHome);

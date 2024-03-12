@@ -1,4 +1,4 @@
-import { HomeDB } from "../databases/home.db.js";
+import {HomeDB} from "../databases/home.db.js";
 import { areStringsFilled } from "../utils/string.utils.js";
 import { UserDB } from "../databases/user.db.js";
 
@@ -18,7 +18,7 @@ const create = async ({ body: { address, userId } }, res) => {
 };
 
 //  creation of home user
-const createUser = async ({ body: { address, userId } }, res) => {
+const createUserHome = async ({ body: { address, userId } }, res) => {
   const user = await UserDB.readOne(userId);
   if (user.role === `Tenant`)
     return res
@@ -54,7 +54,7 @@ const deleteHome = async ({ params: { id } }, res) => {
 
 export const HomeController = {
   create,
-  createUser,
+  createUserHome,
   readUserId,
   deleteHome,
 };

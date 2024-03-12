@@ -30,6 +30,7 @@ const create = async (req, res) => {
   } catch (err) {
     console.log("err =>", err.message);
   }
+  console.log(files)
   // Vérifie si un fichier est téléchargé
   if (!files.doc)
     return res.status(415).json({ message: `Unsupported Media Type` });
@@ -44,8 +45,9 @@ const create = async (req, res) => {
 };
 
 // Permet de lire tous les docs
-const readAllDoc = async ({ params }, res) => {
-  const response = await DocDB.readAllDoc(params.documents);
+const readAllDoc = async (req, res) => {
+  const userId = req.body.userID;
+  const response = await DocDB.readAllDoc(userId);
 
   const { result, error } = response;
 

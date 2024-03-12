@@ -1,8 +1,9 @@
 export const APP_ROUTES = {
-  HOME: "/",
-  DOC: "/doc",
+  HOME_PAGE: "/",
+  DOC_DATA: "/doc",
   USER: "/user",
   SIGN_UP: "/sign-up",
   SIGN_IN: "/login",
-  DASHBOARD:"/read"
+  DASHBOARD:"/read",
+  CONFIRMATION : "/confirmationPage",
 };

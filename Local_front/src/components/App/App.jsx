@@ -9,6 +9,7 @@ import User from "../User/User";
 import SignUp from "../SignUp/SignUp";
 import SignInForm from "../SignInForm/SignInForm";
 import Dashboard from "../Dashboard/Dashboard";
+import DocumentsData from "../Documents/DocumentsData";
 
 const App = () => {
   return (
@@ -18,7 +19,7 @@ const App = () => {
         <main>
           <Routes>
             <Route
-              path={APP_ROUTES.HOME}
+              path={APP_ROUTES.HOME_PAGE}
               element={
                 <>
                   <section className="home-page">
@@ -60,8 +61,18 @@ const App = () => {
               }
             />
 
-            {/* <Route
+            <Route
               path={APP_ROUTES.DOC}
+              element={
+                <>
+                  <section className="Documents">
+                    <DocumentsData />
+                  </section>
+                </>
+              }
+            />
+            <Route
+              path="*"
               element={
                 <>
                   <h1>Oops !</h1>
@@ -69,7 +80,7 @@ const App = () => {
                   <p>Cette page n'existe pas.</p>
                 </>
               }
-            /> */}
+            />
           </Routes>
         </main>
         <Footer />
@@ -77,4 +88,5 @@ const App = () => {
     </>
   );
 };
+
 export default App;

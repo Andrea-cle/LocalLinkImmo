@@ -4,6 +4,7 @@ import Input from "../Input/Input";
 import Button from "../Button/Button";
 import "./signinForm.scss";
 import { APP_ROUTES } from "../../constants/route.const";
+import { postRequest } from "../../api/api";
 
 const SignInForm = () => {
   const [form, setForm] = useState({
@@ -14,15 +15,22 @@ const SignInForm = () => {
   const navigate = useNavigate(); // Utilisation de useNavigate pour la navigation
 
   useEffect(() => {
-    if (localStorage.getItem("user")) {
+    if (localStorage.getItem("/user")) {
       navigate(APP_ROUTES.DASHBOARD, { replace: true });
     }
   }, [navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const response = await postRequest(`/user/sign-in`, {
+      email: form.email,
+      password: form.password,
+    });
+    console.log(response.result.user.token);
+
+    localStorage.setItem(`token`, JSON.stringify(response.result.user.token));
     localStorage.setItem(
-      "user",
+      "/user",
       JSON.stringify({
         email: form.email,
         connected: true,

@@ -1,5 +1,6 @@
-const API_URL = "http://localhost:9000/";
+const API_URL = "http://localhost:9000";
 
+// Effectue une requête HTTP GET vers l'API
 const getRequest = async (url, token) => {
   const config = {
     method: "GET",
@@ -12,6 +13,7 @@ const getRequest = async (url, token) => {
   return response;
 };
 
+// Effectue une requête HTTP POST vers l'API
 const postRequest = async (url, body = {}, token) => {
   const config = {
     method:"POST", 
@@ -27,6 +29,32 @@ const postRequest = async (url, body = {}, token) => {
   return await request(url, config);
 };
 
+// Effectue une requête HTTP DELETE vers l'API
+const deleteRequest = async (url, token)=>{
+  const config={
+    method:"DELETE",
+    headers: { "Content-type": "application/json; charset=UTF-8" },
+  }
+  if (token) config.headers.Authorization=token;
+
+  return await request(url, config);
+};
+
+// Effectue une requête HTTP PUT vers l'API
+const putRequest = async(url, body ={}, token)=>{
+  const config ={
+    method:"PUT",
+    body: body instanceof FormData ? Body : JSON.stringify(body),
+    headers:
+    body instanceof FormData
+    ? {} : { "Content-type": "application/json; charset=UTF-8" },
+  };
+  if (token) config.headers.Authorization = token;
+
+  return await request(url,config);
+}
+
+// Fonction interne pour effectuer la requête HTTP
 const request = async (url, config) => {
   let result = null;
   let error = null;
@@ -44,30 +72,4 @@ const request = async (url, config) => {
   }
 };
 
-const deleteRequest = async (url, token)=>{
-  const config={
-    method:"DELETE",
-    headers: { "Content-type": "application/json; charset=UTF-8" },
-  }
-  if (token) config.headers.Authorization=token;
-
-  return await request(url, config);
-};
-
-const putRequest = async(url, body ={}, token)=>{
-  const config ={
-    method:"PUT",
-    body: body instanceof FormData ? Body : JSON.stringify(body),
-    headers:
-    body instanceof FormData
-    ? {} : { "Content-type": "application/json; charset=UTF-8" },
-  };
-  if (token) config.headers.Authorization = token;
-
-  return await request(url,config);
-}
-
 export { getRequest, postRequest, deleteRequest, putRequest };
-
-
-
