@@ -12,21 +12,22 @@ const SignUp = () => {
     confirmPass: "",
     role: "tenant",
   });
-
-  const navigate = useNavigate(); // Initialisation du hook useNavigate pour la redirection
+  // Initialisation du hook useNavigate pour la redirection
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    console.log("erreur ici");
     // Envoi de la requête POST au serveur pour créer le compte utilisateur
     const response = await postRequest("/user", form);
-
+    console.log("ou la");
     if (response.error) {
       console.error(response.error);
     } else {
       // Stockage des informations de l'utilisateur dans le localStorage
-      localStorage.setItem("userEmail", form.email);
-      localStorage.setItem("userRole", form.role);
+      localStorage.setItem("email", form.email);
+      localStorage.setItem("role", form.role);
+      localStorage.setItem("password", form.password);
 
       // Redirection vers la page de confirmation après la création du compte
       navigate("/confirmationPage");
@@ -67,7 +68,7 @@ const SignUp = () => {
       {/* Sélecteur de rôle utilisateur */}
       <select
         id="role"
-        label="role"
+        // label="role"
         value={form.role}
         onChange={(event) => updateForm(event.target.value, "role")}
       >

@@ -10,6 +10,7 @@ import SignUp from "../SignUp/SignUp";
 import SignInForm from "../SignInForm/SignInForm";
 import Dashboard from "../Dashboard/Dashboard";
 import DocumentsData from "../Documents/DocumentsData";
+import ConfirmationPage from "../Confirmation/Confirmation";
 
 const App = () => {
   return (
@@ -41,6 +42,14 @@ const App = () => {
               element={
                 <section className="Inscription">
                   <SignUp />
+                </section>
+              }
+            />
+            <Route
+              path={APP_ROUTES.CONFIRMATION}
+              element={
+                <section className="confirmation">
+                  <ConfirmationPage />
                 </section>
               }
             />

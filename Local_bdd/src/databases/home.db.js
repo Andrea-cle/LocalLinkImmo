@@ -3,7 +3,7 @@ import query from "./init.db.js";
 // Définition des opérations liées à la table Home
 
   // Création d'un nouveau logement
-  const createOneHome = async(address, userID) => {
+  const createOneHome = async(address, userId) => {
     const sql = `
     INSERT INTO home (address) 
     VALUES (?);

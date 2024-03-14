@@ -14,14 +14,12 @@ const getRequest = async (url, token) => {
 };
 
 // Effectue une requête HTTP POST vers l'API
-const postRequest = async (url, body = {}, token) => {
+// "LocalLinkImmo", "vhueryijiijiàâhfoqskfhugè_ezhfuicfhnuipqs") 
+const postRequest = async (url, body = {}, token = null) => {
   const config = {
-    method:"POST", 
-    body: body instanceof FormData ? body : JSON.stringify(body),
-    headers:
-      body instanceof FormData
-        ? {}
-        : { "Content-type": "application/json; charset=UTF-8" },
+    method: "POST",
+    body: JSON.stringify(body),
+    headers: { "Content-type": "application/json; charset=UTF-8" },
   };
 
   if (token) config.headers.Authorization = token;
@@ -29,30 +27,29 @@ const postRequest = async (url, body = {}, token) => {
   return await request(url, config);
 };
 
+
 // Effectue une requête HTTP DELETE vers l'API
-const deleteRequest = async (url, token)=>{
-  const config={
-    method:"DELETE",
+const deleteRequest = async (url, token) => {
+  const config = {
+    method: "DELETE",
     headers: { "Content-type": "application/json; charset=UTF-8" },
-  }
-  if (token) config.headers.Authorization=token;
+  };
+  if (token) config.headers.Authorization = token;
 
   return await request(url, config);
 };
 
 // Effectue une requête HTTP PUT vers l'API
-const putRequest = async(url, body ={}, token)=>{
-  const config ={
-    method:"PUT",
-    body: body instanceof FormData ? Body : JSON.stringify(body),
-    headers:
-    body instanceof FormData
-    ? {} : { "Content-type": "application/json; charset=UTF-8" },
+const putRequest = async (url, body = {}, token) => {
+  const config = {
+    method: "PUT",
+    body: body instanceof FormData ? body : JSON.stringify(body),
+    headers: body instanceof FormData ? {} : { "Content-type": "application/json; charset=UTF-8" },
   };
   if (token) config.headers.Authorization = token;
 
-  return await request(url,config);
-}
+  return await request(url, config);
+};
 
 // Fonction interne pour effectuer la requête HTTP
 const request = async (url, config) => {
@@ -64,7 +61,7 @@ const request = async (url, config) => {
     const response = await fetch(`${API_URL}${url}`, config);
     status = response.status;
     result = await response.json();
-    if (status >= 400) throw new Error(`Error ${status}: ${result?.message}`);
+    if (status >= 400) throw new Error(`Erreur ${status}: ${result?.message}`);
   } catch (err) {
     error = err.message;
   } finally {

@@ -9,8 +9,8 @@ const initUserRoutes = (app) => {
   userRouter.get("/read", jwtMddlwr, UserController.readOne);
 
   // POST
-  userRouter.post("/", UserController.createOneUser);
-  userRouter.post("/user/add_tenant", UserController.addTenant); 
+  userRouter.post("/create", UserController.createOneUser);
+  userRouter.post("/add_tenant", UserController.addTenant); 
   userRouter.post("/sign-in", UserController.signIn);
 
   // PUT
