@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./dashboard.scss";
-import { getRequest } from "../../api/api";
-import { postRequest } from "../../api/api"; // Importez la fonction postRequest
+import { getRequest, postRequest } from "../../api/api";
 import { APP_ROUTES } from "../../constants/route.const";
 import Button from "../Button/Button";
 
@@ -109,13 +108,13 @@ const Dashboard = ({ userId }) => {
       <Link to={`/user ${userId}`}>Voir la liste des utilisateurs</Link>
 
       {/* Formulaire pour télécharger un document */}
-      {userData?.role === "owner" && (
+      {userData && userData.role === "owner" && (
         <form onSubmit={handleSubmitLease}>
           <input type="file" onChange={handleFileChange} />
           <button type="submit">Ajouter un bail</button>
         </form>
       )}
-      {userData?.role === "tenant" && (
+      {userData && userData.role === "tenant" && (
         <form onSubmit={handleSubmitInsurance}>
           <input type="file" onChange={handleFileChange} />
           <button type="submit">Ajouter une assurance</button>

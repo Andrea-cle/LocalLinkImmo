@@ -1,56 +1,60 @@
 import React, { useState, useEffect } from "react";
+import { postRequest } from "../../api/api";
 
 const DocumentsData = () => {
   // State pour stocker la liste des documents et les données du formulaire
   const [documents, setDocuments] = useState([]);
   const [file, setFile] = useState(null);
-  const getToken = localStorage.getItem(`token`);
-  const token = JSON.parse(getToken);
+  const [userData, setUserData] = useState([]);
+  const getToken =
+    typeof localStorage !== "undefined" ? localStorage.getItem(`token`) : null;
+  const token = getToken ? JSON.parse(getToken) : null;
+
   // // Fonction pour charger la liste des documents depuis le serveur
-  // const loadDocuments = async () => {
-  //   try {
-  //     const response = await fetch(`${API_URL}all`);
-  //     if (!response.ok) {
-  //       throw new Error("Erreur lors du chargement des documents");
-  //     }
-  //     const data = await response.json();
-  //     setDocuments(data.result);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
+  const loadDocuments = async () => {
+    try {
+      const response = await fetch(`${API_URL}/all`);
+      if (!response.ok) {
+        throw new Error("Erreur lors du chargement des documents");
+      }
+      const data = await response.json();
+      setDocuments(data.result);
+    } catch (error) {}
+  };
 
   // Effet pour charger la liste des documents lors du chargement du composant
   useEffect(() => {
-    // loadDocuments();
+    loadDocuments();
   }, []);
 
   // Fonction pour gérer la soumission du formulaire d'ajout de document
-  const handleSubmitBaux = async (event) => {
+  const handleSubmitLease = async (event) => {
     event.preventDefault();
 
     const formData = new FormData();
     formData.append("doc", file);
 
-    const insertdoc = await postRequest(`/doc/insert`, token);
-    // const insertdoc2 = await postRequest(
-    //   `/doc/insert/baux/${homeId}/${tenantId}`,
-    //   token
-    // );
+    try {
+      const insertDocResponse = await postRequest(
+        `/doc/insert`,
+        formData,
+        token
+      );
+      const insertLeaseResponse = await postRequest(
+        `/doc/insert/${homeId}/${tenantId}`,
+        formData,
+        token
+      );
 
-    // try {
-    //   const response = await fetch(`${API_URL}`, {
-    //     method: "POST",
-    //     body: formData,
-    //   });
-    //   if (!response.ok) {
-    //     throw new Error("Erreur lors de l'ajout du document");
-    //   }
-    //   // Recharger la liste des documents après l'ajout
-    //   loadDocuments();
-    // } catch (error) {
-    //   console.error(error);
-    // }
+      if (!insertDocResponse.error && !insertLeaseResponse.error) {
+        // Recharger la liste des documents après l'ajout
+        loadDocuments();
+      } else {
+        throw new Error("Erreur lors de l'ajout du document");
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   // Fonction pour mettre à jour le fichier sélectionné dans le state
@@ -71,22 +75,19 @@ const DocumentsData = () => {
 
       {/* Formulaire pour ajouter un document */}
       <h2>Ajouter un document</h2>
-      {/* {user.role === "owner" && (
-        <form onSubmit={handleSubmitBaux}>
+      {/* Formulaire pour télécharger un document */}
+      {userData && userData.role === "owner" && (
+        <form onSubmit={handleSubmitLease}>
           <input type="file" onChange={handleFileChange} />
-          <button type="submit">Ajouter</button>
+          <button type="submit">Ajouter un bail</button>
         </form>
       )}
-      {user.role === "tenant" && (
+      {userData && userData.role === "tenant" && (
         <form onSubmit={handleSubmitInsurance}>
           <input type="file" onChange={handleFileChange} />
-          <button type="submit">Ajouter</button>
+          <button type="submit">Ajouter une assurance</button>
         </form>
-      )} */}
-      <form onSubmit={handleSubmitBaux}>
-        <input type="file" onChange={handleFileChange} />
-        <button type="submit">Ajouter</button>
-      </form>
+      )}
     </div>
   );
 };

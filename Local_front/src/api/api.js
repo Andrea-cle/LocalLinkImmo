@@ -61,7 +61,7 @@ const request = async (url, config) => {
     const response = await fetch(`${API_URL}${url}`, config);
     status = response.status;
     result = await response.json();
-    if (status >= 400) throw new Error(`Erreur ${status}: ${result?.message}`);
+    if (status >= 400) throw new Error(`Erreur ${status}: la requête à échouée`);
   } catch (err) {
     error = err.message;
   } finally {

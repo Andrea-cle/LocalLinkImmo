@@ -17,10 +17,10 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("erreur ici");
+
     // Envoi de la requête POST au serveur pour créer le compte utilisateur
     const response = await postRequest("/user/create", form);
-    console.log("ou la");
+
     if (response.error) {
       console.error(response.error);
     } else {
