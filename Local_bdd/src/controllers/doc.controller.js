@@ -9,7 +9,7 @@ const create = async (req, res) => {
   // Extrait les paramètres de la requête
   const { type, homeId, tenantId } = req.params;
 
-  // Permet de construie le chemin d'enregistremennt du document
+  // Permet de construire le chemin d'enregistremennt du document
   const url = `./src/documents/${type}/${homeId}/${tenantId}`;
 
   const form = formidable({

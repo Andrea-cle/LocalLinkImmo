@@ -11,22 +11,23 @@ import SignInForm from "../SignInForm/SignInForm";
 import Dashboard from "../Dashboard/Dashboard";
 import DocumentsData from "../Documents/DocumentsData";
 import ConfirmationPage from "../Confirmation/Confirmation";
+import FormContact from "../FormContact/FormContact";
 
 const App = () => {
   return (
-    <>
+    <div>
       <BrowserRouter>
         <Header />
-        <main>
+        <main className="container">
           <Routes>
             <Route
               path={APP_ROUTES.HOME_PAGE}
               element={
-                <>
+                <div>
                   <section className="home-page">
                     <HomePage />
                   </section>
-                </>
+                </div>
               }
             />
             <Route
@@ -73,28 +74,38 @@ const App = () => {
             <Route
               path={APP_ROUTES.DOC}
               element={
-                <>
+                <div>
                   <section className="Documents">
                     <DocumentsData />
                   </section>
-                </>
+                </div>
+              }
+            />
+            <Route
+              path="FormContact"
+              element={
+                <div>
+                  <section className="Contactez-nous">
+                    <FormContact />
+                  </section>
+                </div>
               }
             />
             <Route
               path="*"
               element={
-                <>
+                <div>
                   <h1>Oops !</h1>
                   <em>Erreur : 404</em>
                   <p>Cette page n'existe pas.</p>
-                </>
+                </div>
               }
             />
           </Routes>
         </main>
         <Footer />
       </BrowserRouter>
-    </>
+    </div>
   );
 };
 

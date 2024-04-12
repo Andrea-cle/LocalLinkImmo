@@ -2,5 +2,10 @@
 
 .sign-in-form {
   @include mxn.flex("column", "nowrap");
-  gap: 40px;
+  gap: 32px;
+  margin: var(--margin-xl);
+}
+
+a {
+  color: var(--text-color);
 }

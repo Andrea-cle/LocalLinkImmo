@@ -6,7 +6,6 @@ import { areStringsFilled } from "../utils/string.utils.js";
 import { hashPass, compareHash } from "../utils/crypto.utils.js";
 import { jwtSign } from "../utils/jwt.utils.js";
 
-
 // Créer un nouvel utilisateur
 const createOneUser = async (
   { body: { role, email, password, confirmPass } },
@@ -29,7 +28,7 @@ const createOneUser = async (
       message: `Invalid Password format : must contain atleast 8 characters`,
     });
 
-    // password hashing
+  // password hashing
   const hashPwResponse = await hashPass(password);
   const hashPwError = hashPwResponse.error;
 

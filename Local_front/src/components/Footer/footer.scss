@@ -1,9 +1,8 @@
 @use "../../styles/mixins" as mxn;
 
 .footer {
-  background-color: #99f1ea;
-  color: #fff;
-  padding: 20px 0;
+  color: var(--white);
+  padding: 1rem 0;
   text-align: center;
   font-size: var(--font-label);
   margin-bottom: 0;
@@ -31,8 +30,8 @@
         margin-right: 10px;
 
         a {
-          color: #fff;
           text-decoration: none;
+          color: var(--white);
 
           &:hover {
             text-decoration: underline;
@@ -44,7 +43,7 @@
 }
 
 .footer-brand {
-  margin-top: 20px;
+  margin-top: 1rem;
   flex: 1 1 100%;
 
   p {
@@ -52,7 +51,8 @@
     font-size: 14px;
   }
 }
-@media screen and (min-width: 767px) {
+
+@media screen and (min-width: 780px) {
   .footer-content {
     justify-content: space-between;
 

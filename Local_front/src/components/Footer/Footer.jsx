@@ -1,12 +1,14 @@
+import FormContact from "../FormContact/FormContact";
 import "./footer.scss";
 
+// Permet de gérer le footer des pages
 const Footer = () => {
   return (
     <>
-      <section className="footer">
+      <footer className="footer">
         <div className="footer-content">
           <p>
-            <a href="*">Contactez-nous</a>
+            <a href="/FormContact">Contactez-nous</a>
           </p>
           <div className="footer-navigate">
             <ul>
@@ -22,7 +24,7 @@ const Footer = () => {
             <p>&copy; 2024 Local Link Immo</p>
           </div>
         </div>
-      </section>
+      </footer>
     </>
   );
 };

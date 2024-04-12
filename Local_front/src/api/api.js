@@ -1,5 +1,23 @@
 const API_URL = "http://localhost:9000";
 
+// Fonction interne pour effectuer la requête HTTP
+const request = async (url, config) => {
+  let result = null;
+  let error = null;
+  let status = -1;
+
+  try {
+    const response = await fetch(`${API_URL}${url}`, config);
+    status = response.status;
+    result = await response.json();
+    if (status >= 400) throw new Error(`Erreur ${status}: ${result?.message}`);
+  } catch (err) {
+    error = err.message;
+  } finally {
+    return { result, error, status };
+  }
+};
+
 // Effectue une requête HTTP GET vers l'API
 const getRequest = async (url, token) => {
   const config = {
@@ -49,24 +67,6 @@ const putRequest = async (url, body = {}, token) => {
   if (token) config.headers.Authorization = token;
 
   return await request(url, config);
-};
-
-// Fonction interne pour effectuer la requête HTTP
-const request = async (url, config) => {
-  let result = null;
-  let error = null;
-  let status = -1;
-
-  try {
-    const response = await fetch(`${API_URL}${url}`, config);
-    status = response.status;
-    result = await response.json();
-    if (status >= 400) throw new Error(`Erreur ${status}: la requête à échouée`);
-  } catch (err) {
-    error = err.message;
-  } finally {
-    return { result, error, status };
-  }
 };
 
 export { getRequest, postRequest, deleteRequest, putRequest };

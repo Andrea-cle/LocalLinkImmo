@@ -74,17 +74,19 @@ const DocumentsData = () => {
       </ul>
 
       {/* Formulaire pour ajouter un document */}
-      <h2>Ajouter un document</h2>
+      <h3>Ajouter un document</h3>
       {/* Formulaire pour télécharger un document */}
       {userData && userData.role === "owner" && (
         <form onSubmit={handleSubmitLease}>
-          <input type="file" onChange={handleFileChange} />
+          <label htmlFor="leaseFile">Sélectionner un fichier:</label>
+          <input type="file" id="leaseFile" onChange={handleFileChange} />
           <button type="submit">Ajouter un bail</button>
         </form>
       )}
       {userData && userData.role === "tenant" && (
         <form onSubmit={handleSubmitInsurance}>
-          <input type="file" onChange={handleFileChange} />
+          <label htmlFor="insuranceFile">Selectionner un fichier:</label>
+          <input type="file" id="insuranceFile" onChange={handleFileChange} />
           <button type="submit">Ajouter une assurance</button>
         </form>
       )}

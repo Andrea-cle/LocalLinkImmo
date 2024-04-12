@@ -4,6 +4,7 @@ import "./dashboard.scss";
 import { getRequest, postRequest } from "../../api/api";
 import { APP_ROUTES } from "../../constants/route.const";
 import Button from "../Button/Button";
+import DocumentsData from "../Documents/DocumentsData";
 
 const Dashboard = ({ userId }) => {
   const navigate = useNavigate();
@@ -73,10 +74,10 @@ const Dashboard = ({ userId }) => {
   return (
     <div className="dashboard">
       <i className="fa-solid fa-keyboard" />
-      <h2>Dashboard</h2>
+      <h1>Dashboard</h1>
       <Button onClick={handleDisconnect} text={"Déconnexion"} />
       {/* Affichage des documents associés */}
-      <h3>Documents associés :</h3>
+      <h2>Documents associés :</h2>
       <ul>
         {Array.isArray(docData) &&
           docData.map((document) => (
@@ -90,7 +91,7 @@ const Dashboard = ({ userId }) => {
       <Link to="/doc">Voir la liste des documents</Link>
 
       {/* Affichage des informations utilisateur */}
-      <h3>Informations utilisateur :</h3>
+      <h2>Informations utilisateur :</h2>
       {userData && (
         <div>
           <p>Email : {userData.email}</p>
@@ -99,7 +100,7 @@ const Dashboard = ({ userId }) => {
       )}
 
       {/* Affichage des données d'accès utilisateur */}
-      <h3>Accès utilisateur :</h3>
+      <h2>Accès utilisateur :</h2>
       {userAccessData && (
         <div>{/* Affichage des données d'accès utilisateur */}</div>
       )}

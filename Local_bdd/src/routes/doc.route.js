@@ -13,7 +13,7 @@ const initDocRoutes = (app) => {
   docRouter.post("/insert/:type/:homeId/:tenantId", jwtMddlwr, DocController.create);
 
   // DELETE
-  docRouter.delete("/:id", DocController.deleteOne);
+  docRouter.delete("/:id", jwtMddlwr, DocController.deleteOne);
 
   // Attaching router to /doc path
   app.use("/doc", docRouter);

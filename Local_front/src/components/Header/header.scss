@@ -1,36 +1,70 @@
-@use "../../styles/mixins" as mxn;
-
 .header {
-  @include mxn.header;
+  color: var(--white);
+  padding: var(--padding-xs);
+  text-align: center;
+  align-items: center;
 
-  .logo {
-    height: auto;
-  }
-  &_content {
-    // flex-grow: 1;
-
-    h1 {
-      text-align: center;
-      font-size: 24px;
-      margin-bottom: 5px;
-    }
-    h3 {
-      font-size: 14px;
-      text-align: center;
-    }
-  }
-
-  nav ul {
+  @media only screen and (min-width: 780px) {
     display: flex;
-    justify-content: space-around;
-    padding: 30px;
   }
 
-  nav a {
+  & h1,
+  h2 {
+    padding: var(--padding-xs);
+  }
+
+  .navbar {
+    margin: auto;
+    width: 90%;
     display: flex;
     flex-direction: column;
-    text-decoration: none;
-    align-items: center;
-    font-size: 14px;
+
+    nav {
+      flex-direction: column;
+      display: none;
+
+      @media only screen and (min-width: 780px) {
+        display: flex;
+        flex-direction: row;
+        justify-content: end;
+        gap: 2rem;
+      }
+
+      @media only screen and (min-width: 1200px) {
+        justify-content: space-around;
+      }
+
+      a {
+        text-decoration: none;
+        color: var(--white);
+        margin: var(--margin-xxs);
+        padding: var(--padding-xs);
+        border-radius: var(--radius-s);
+
+        &:hover {
+          background-color: var(--light-beige);
+          color: var(--blue);
+        }
+      }
+    }
+
+    &.active {
+      nav {
+        display: flex;
+      }
+    }
+
+    .menu-icon {
+      display: block;
+      align-items: center;
+      cursor: pointer;
+      font-size: var(--font-size-s);
+
+      @media only screen and (min-width: 780px) {
+        display: none;
+      }
+    }
+
+    // .menu-icon.active .
   }
 }

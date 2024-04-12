@@ -15,7 +15,7 @@ export const hashPass = async (pass) => {
     return { hashed, error };
   }
 };
-// Permet de vérifier et de comparer avec l'ancde mot passe 
+// Permet de vérifier et de comparer avec l'ancien mot de passe 
 export const compareHash = async (passNotHashed, passHashed) => {
   let isSame = false;
   try {

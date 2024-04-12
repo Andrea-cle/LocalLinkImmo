@@ -1,0 +1,23 @@
+import React from "react";
+import "./video.scss";
+
+const VideoPlayer = () => {
+  return (
+    <div>
+      <h2>Ma Vidéo</h2>
+      <video controls width="500">
+        <iframe
+          src="https://www.youtube.com/embed/wBNAX8aix08?si=zyytPaxUJ7fqZ_Un"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen
+        ></iframe>
+        Votre navigateur ne prend pas en charge la lecture de vidéos.
+      </video>
+    </div>
+  );
+};
+
+export default VideoPlayer;

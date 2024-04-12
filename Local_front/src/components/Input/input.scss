@@ -1,28 +1,27 @@
 @use "../../styles/mixins" as mxn;
-.input {
+
+.input,
+select {
   @include mxn.input-reseter;
+  border-radius: var(--radius-s);
+
   &__container {
+    @include mxn.grow;
+    @include mxn.flex("column", "nowrap");
+    position: relative;
+    transition-property: all;
+    transition-duration: 0.15s;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 0 2px var(--shadow-color), 0px 4px 0 var(--shadow-color);
+
     &:focus-within {
       transform: translateY(2px);
       box-shadow: 0 0 0 2px var(--shadow-color);
     }
-    @include mxn.grow;
-    @include mxn.flex("column", "nowrap");
-    gap: 4px;
-    z-index: 1;
-    position: relative;
-    background: white;
-    transition-property: all;
-    transition-duration: 0.15s;
-    border-radius: var(--small-radius);
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 0 0 2px var(--shadow-color), 0px 4px 0 var(--shadow-color);
-  }
-  &__label {
-    top: -60%;
-    left: 8px;
-    font-style: italic;
-    position: absolute;
-    font-size: var(--font-size-tiny);
+
+    &__label {
+      font-style: italic;
+      font-size: var(--font-size-tiny);
+    }
   }
 }

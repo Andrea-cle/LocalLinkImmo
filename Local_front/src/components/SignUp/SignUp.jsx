@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import "./signUp.scss";
 import Button from "../Button/Button";
 import Input from "../Input/Input";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { postRequest } from "../../api/api";
+import ConfirmationPage from "../Confirmation/Confirmation";
 
 const SignUp = () => {
   const [form, setForm] = useState({
@@ -27,10 +28,10 @@ const SignUp = () => {
       // Stockage des informations de l'utilisateur dans le localStorage
       localStorage.setItem("email", form.email);
       localStorage.setItem("role", form.role);
-      localStorage.setItem("password", form.password);
+      // localStorage.setItem("password", form.password);
 
       // Redirection vers la page de confirmation après la création du compte
-      navigate("/confirmationPage");
+      useNavigate("/confirmationPage");
     }
   };
 
@@ -72,13 +73,14 @@ const SignUp = () => {
         value={form.role}
         onChange={(event) => updateForm(event.target.value, "role")}
       >
-        <option value="tenant">Locataire</option>
-        <option value="owner">Propriétaire</option>
+        <option value="1">Locataire</option>
+        <option value="2">Propriétaire</option>
       </select>
       {/* Bouton de soumission du formulaire */}
       <div className="btns">
-        <Button type={"submit"} text={"Valider"} color={"var(--primary)"} />
+        <Button type={"submit"} text={"Bienvenue !"} color={"var(--primary)"} />
       </div>
+      <Link to="/ConfirmationPage"></Link>
       {/* Lien vers la page de connexion pour les utilisateurs déjà inscrits */}
       <p>
         Vous avez déjà un compte ? <a href="/login">Connectez-vous</a>

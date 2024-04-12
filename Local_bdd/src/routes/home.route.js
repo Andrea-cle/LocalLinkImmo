@@ -6,14 +6,14 @@ const initHomeRoutes = (app) => {
   const homeRouter = express.Router();
 
   // GET
-  homeRouter.get("/:id", HomeController.readUserId); 
+  homeRouter.get("/:id", jwtMddlwr, HomeController.readUserId); 
 
   //  POST
   homeRouter.post("/", jwtMddlwr, HomeController.create);
   homeRouter.post("/homeID", jwtMddlwr, HomeController.createUserHome);
 
   // DELETE
-  homeRouter.delete("/:homeID", HomeController.deleteHome);
+  homeRouter.delete("/:homeID", jwtMddlwr, HomeController.deleteHome);
 
   // lié le router au chemin /home
   app.use("/home", homeRouter);
