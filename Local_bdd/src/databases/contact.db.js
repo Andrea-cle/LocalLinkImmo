@@ -1,4 +1,4 @@
-import query from "./init.db";
+import query from "./init.db.js";
 
 // INSERT DELETE UPDATE READ
 
@@ -13,7 +13,7 @@ const createContact = async (email, subject, comment) => {
   let result = null;
 
   try {
-    result = await query(sql, [subject, email, comment]);
+    result = await query(sql, [email, subject, comment]);
   } catch (err) {
     error = err.message;
   } finally {
@@ -22,7 +22,7 @@ const createContact = async (email, subject, comment) => {
 };
 
 // requete pour sélectionner tous les messages non lus
-const unreadMessage = async (comment, statut) => {
+const unreadMessage = async () => {
   const sql = `
     SELECT * FROM contact
      WHERE statut = 0
@@ -32,7 +32,7 @@ const unreadMessage = async (comment, statut) => {
   let result = null;
 
   try {
-    result = await query(sql, [comment, statut]);
+    result = await query(sql, []);
   } catch (err) {
     error = err.message;
   } finally {
@@ -41,7 +41,7 @@ const unreadMessage = async (comment, statut) => {
 };
 
 // requete pour selectionner tous les messages lus soit à 1
-const readMessage = async (comment, statut) => {
+const readMessage = async () => {
   const sql = `
     SELECT * FROM contact
     WHERE statut = 1
@@ -51,7 +51,7 @@ const readMessage = async (comment, statut) => {
   let result = null;
 
   try {
-    result = await query(sql, [comment, statut]);
+    result = await query(sql, []);
   } catch (err) {
     error = err.message;
   } finally {
@@ -61,7 +61,7 @@ const readMessage = async (comment, statut) => {
 
 // requete pour selectionner 1 message en fonction de son id
 
-const idMessage = async (comment, id) => {
+const idMessage = async (id) => {
   const sql = `
     SELECT * FROM contact
     WHERE id=?
@@ -71,7 +71,7 @@ const idMessage = async (comment, id) => {
   let result = null;
 
   try {
-    result = await query(sql, [comment, id]);
+    result = await query(sql, [id]);
   } catch (err) {
     error = err.message;
   } finally {

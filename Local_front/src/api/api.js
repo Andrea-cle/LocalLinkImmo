@@ -32,7 +32,7 @@ const getRequest = async (url, token) => {
 };
 
 // Effectue une requête HTTP POST vers l'API
-// "LocalLinkImmo", "vhueryijiijiàâhfoqskfhugè_ezhfuicfhnuipqs") 
+// "LocalLinkImmo", "vhueryijiijiàâhfoqskfhugè_ezhfuicfhnuipqs")
 const postRequest = async (url, body = {}, token = null) => {
   const config = {
     method: "POST",
@@ -44,7 +44,6 @@ const postRequest = async (url, body = {}, token = null) => {
 
   return await request(url, config);
 };
-
 
 // Effectue une requête HTTP DELETE vers l'API
 const deleteRequest = async (url, token) => {
@@ -62,7 +61,10 @@ const putRequest = async (url, body = {}, token) => {
   const config = {
     method: "PUT",
     body: body instanceof FormData ? body : JSON.stringify(body),
-    headers: body instanceof FormData ? {} : { "Content-type": "application/json; charset=UTF-8" },
+    headers:
+      body instanceof FormData
+        ? {}
+        : { "Content-type": "application/json; charset=UTF-8" },
   };
   if (token) config.headers.Authorization = token;
 

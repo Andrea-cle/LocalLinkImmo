@@ -1,21 +1,23 @@
-import { ContactDB } from "../databases/contact.db";
-import isEmail from "validator/lib/isEmail.js";
-import { areStringsFilled } from "../utils/string.utils";
+import { ContactDB } from "../databases/contact.db.js";
+// import isEmail from "validator/lib/isEmail.js";
+import { areStringsFilled } from "../utils/string.utils.js";
 // INSERT DELETE UPDATE READ
 
 // requete pour insérer un contact
 const insertedContact = async ({ body: { email, subject, comment } }, res) => {
-  const areStrings = areStringsFilled([email, comment]);
+  const areStrings = areStringsFilled([email, subject, comment]);
+
   if (!areStrings)
     return res.status(400).json({ message: `Données manquantes` });
-  const { error, result: addContact } = await ContactDB.createContact({
+
+  const { error, result: addContact } = await ContactDB.createContact(
     email,
     subject,
-    comment,
-  });
+    comment
+  );
 
   // Vérification que tous les champs soient remplis
-  if (!email || !subject || !comment) {
+  /*if (!email || !subject || !comment) {
     return res
       .status(400)
       .json({ message: `Veuillez remplir tous les champs requis` });
@@ -27,18 +29,18 @@ const insertedContact = async ({ body: { email, subject, comment } }, res) => {
       .status(400)
       .json({ message: `Le format de l'email est invalide` });
   }
-
+*/
   if (error) {
     return res
       .status(500)
-      .json({ message: `Erreur lors de l'insertions du contact` });
+      .json({ message: `Erreur lors de l'insertion du contact` });
   }
   res.status(200).json({ message: `Contact créé avec succès`, addContact });
 
-  // Gestion des erreurs non prévues
-  return res
-    .status(500)
-    .json({ message: `Erreur inattendue lors de la création` });
+  // // Gestion des erreurs non prévues
+  // return res
+  //   .status(500)
+  //   .json({ message: `Erreur inattendue lors de la création` });
 };
 
 // requete pour sélectionner tous les messages non lus
@@ -90,14 +92,15 @@ const updateMessageStatut = async (req, res) => {
   // recupére l'identifiant du message depuis les paramètres de la requête
   const messageId = req.params.messageId;
 
-  const { error, result: selectMessageID } =
-    await ContactDB.updateMessageStatut(messageId);
+  const { error, result: selectMessageId } = await ContactDB.updateStatut(
+    messageId
+  );
 
   if (error) {
     // En cas d'erreur lors de la mise à jour du statut, renvoyer une réponse avec le code d'erreur approprié
     return res.status(500).json({
-      message: `Erreur lors de la mise à jours du statu du message : ${error}`,
-      selectMessageID,
+      message: `Erreur lors de la mise à jours du statut du message : ${error}`,
+      selectMessageId,
     });
   }
   res.status(200).json({
@@ -106,7 +109,7 @@ const updateMessageStatut = async (req, res) => {
 };
 
 // requete pour supprimer 1 message
-const deleteMessage = async (req, res) => {
+const removeMessage = async (req, res) => {
   const messageId = req.params.messageId;
 
   const { error, result: deleteMessageId } = await ContactDB.deleteMessage(
@@ -131,5 +134,5 @@ export const ContactController = {
   selectReadMessage,
   selectIdMessage,
   updateMessageStatut,
-  deleteMessage,
+  removeMessage,
 };
