@@ -1,14 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "./confirmation.scss";
 
 const ConfirmationPage = () => {
   return (
-    <div className="confirmation-page">
-      <h2>Confirmation de création de compte</h2>
-      <p>Votre compte a été créé avec succès !</p>
-      <p>Vous pouvez maintenant vous connecter avec vos identifiants.</p>
+    <main className="confirmation-page">
+      <section className="article">
+        <h2>Nous sommes heureux de vous compter parmi nous !</h2>
+        <div className="texte">
+          <p>Votre compte a été créé avec succès !</p>
+          <p>Vous pouvez maintenant vous connecter avec vos identifiants.</p>
+        </div>
+      </section>
       <Link to="/login">Se connecter</Link>
-    </div>
+    </main>
   );
 };
 

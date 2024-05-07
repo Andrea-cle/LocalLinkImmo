@@ -3,26 +3,19 @@ import "./formContact.scss";
 import Button from "../Button/Button";
 import Input from "../Input/Input";
 import { postRequest } from "../../api/api";
-import { useNavigate } from "react-router-dom";
-// import { link, useNavigate } from "react-router-dom";
 
 const FormContact = () => {
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
   const [comment, setComment] = useState("");
   const [errors, setErrors] = useState({});
-  const [formError, setFormError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
 
   const validateForm = () => {
-    let isValid = true; // Je créé une variable contenant un boolean à true par défaut, cette variable me permettra de savoir si le formulaire est bien rempli ou non
-    // Si true = Bien rempli
-    // Si false = Mal rempli ( au moins 1 erreur détectée dans l'un des champs )
-
+    let isValid = true;
     const newErrors = {};
 
     if (!email.trim() || !/\S+@\S+\.\S+/.test(email)) {
-      // QQCH @ QQCH . QQCH
       isValid = false;
       newErrors.email = "Veuillez fournir un email valide";
     }
@@ -31,12 +24,6 @@ const FormContact = () => {
       isValid = false;
       newErrors.subject = "Veuillez sélectionner un sujet";
     }
-    // trim() --> retire les espaces inutiles
-    // "Jean " --> "Jean"
-    // " Jean" --> "Jean"
-    // " Jean " --> "Jean"
-    // " Jean Paul " --> "Jean Paul"
-    // "         " --> ""
 
     if (comment.trim().length < 20) {
       isValid = false;
@@ -45,6 +32,7 @@ const FormContact = () => {
     }
 
     setErrors(newErrors);
+    setSuccessMessage(null);
     return isValid;
   };
 
@@ -53,38 +41,39 @@ const FormContact = () => {
     e.preventDefault();
 
     if (!validateForm()) {
-      // validateForm() == false
       return;
     }
 
-    const contactData = { email, subject, comment }; // Automatique dans la bdd --> id en AI, date de réception du message et statut ( 0 )
-    console.log(JSON.stringify(contactData));
+    const contactData = { email, subject, comment };
 
     try {
       const response = await postRequest("/contact/write", contactData);
-      console.log("Réponse du serveur :", response);
 
       if (response.status == 200) {
-        setSuccessMessage(
-          "Nous avons bien reçu votre message. Nous vous répondrons dans les plus brefs délais !"
-        );
-        setFormError(null);
-        // console.log(
-        //   "Nous avons bien reçu votre message. Nous vous répondrons dans les plus brefs délais !"
-        // );
+        setErrors({});
+        setSuccessMessage({
+          success:
+            "Nous avons bien reçu votre message. Nous vous répondrons dans les plus brefs délais !",
+        });
+
+        // Réinitialisation des champs du formulaire
+        setEmail("");
+        setSubject("");
+        setComment("");
       } else {
-        setFormError(
-          "Une erreur est survenue, veuillez reformuler votre demande ultérieurement !"
-        );
+        setErrors({});
+        setErrors({
+          globalError:
+            "Une erreur est survenue, veuillez recréer un compte ultérieurement",
+        });
         setSuccessMessage(null);
-        // console.log(
-        //   "Une erreur est survenue, veuillez reformuler votre demande ultérieurement !"
-        // );
       }
     } catch (error) {
-      setFormError("Erreur lors de la communication avec le serveur");
+      setErrors({});
+      setErrors({
+        globalError: "Erreur lors de la communication avec le serveur",
+      });
       setSuccessMessage(null);
-      // console.log("Erreur lors de la communication avec le serveur");
     }
   };
 
@@ -92,13 +81,23 @@ const FormContact = () => {
     <section>
       <h2>En quoi pouvons-nous vous aider ?</h2>
 
+      <img
+        src="../../public/images/orientation.jpg"
+        alt="Photo d'une boussole"
+      />
+
+      {errors.globalError && <p className="error_red">{errors.globalError}</p>}
+      {successMessage && (
+        <p className="success-message">{successMessage.success}</p>
+      )}
+
       <form onSubmit={handleSubmit} className="form-contact">
-        <input
+        <Input
           label="Email"
-          type="text"
+          type="email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          // required
+          onChange={(value) => setEmail(value)}
+          required
         />
 
         {errors.email && <p className="error_red">{errors.email}</p>}
@@ -106,8 +105,8 @@ const FormContact = () => {
         <select
           id="Subject"
           value={subject}
-          onChange={(event) => setSubject(event.target.value)}
-          // required
+          onChange={(e) => setSubject(e.target.value)}
+          required
         >
           <option value="">Sélectionnez...</option>
           <option value="Bail">Demande relative à un bail</option>
@@ -119,24 +118,24 @@ const FormContact = () => {
         {errors.subject && <p className="error_red">{errors.subject}</p>}
 
         <label>
-          Message :
           <textarea
+            placeholder=" Ecrivez votre Message ici"
+            name="comment"
             value={comment}
             onChange={(e) => setComment(e.target.value)}
-            // required
+            required
           ></textarea>
         </label>
 
         {errors.comment && <p className="error_red">{errors.comment}</p>}
 
-        <Button
-          type={"submit"}
-          text={"Dites-nous !"}
-          color={"var(--primary)"}
-        />
-
-        {formError && <p className="error-message">{formError}</p>}
-        {successMessage && <p className="success-message">{successMessage}</p>}
+        <div className="btns">
+          <Button
+            type={"submit"}
+            text={"Dites-nous !"}
+            color={"var(--primary)"}
+          />
+        </div>
       </form>
     </section>
   );

@@ -4,6 +4,8 @@ export const APP_ROUTES = {
   USER: "/user",
   SIGN_UP: "/sign-up",
   SIGN_IN: "/login",
-  DASHBOARD: "/read",
+  DASHBOARD: "/dashboard",
   CONFIRMATION: "/confirmationPage",
+  ADMIN_DASHBOARD: "/adminDash",
+  HOME: "/home",
 };

@@ -7,34 +7,14 @@ import { hashPass, compareHash } from "../utils/crypto.utils.js";
 import { jwtSign } from "../utils/jwt.utils.js";
 
 // Créer un nouvel utilisateur
-const createOneUser = async (
-  { body: { role, email, password, confirmPass } },
-  res
-) => {
-  const areStrings = areStringsFilled([role, email, password, confirmPass]);
-  if (!areStrings) return res.status(403).json({ message: `Missing data` });
-
-  if (role !== `owner` && role !== `tenant`)
-    return res.status(403).json({ message: `Invalid Role` });
-
-  if (!isEmail(email))
-    return res.status(403).json({ message: `Invalid Email format` });
-
-  if (password !== confirmPass)
-    return res.status(400).json({ message: `your password doesn't match` });
-
-  if (password.length < 8)
-    return res.status(403).json({
-      message: `Invalid Password format : must contain atleast 8 characters`,
-    });
-
+const createOneUser = async ({ body: { email, password, role } }, res) => {
   // password hashing
   const hashPwResponse = await hashPass(password);
   const hashPwError = hashPwResponse.error;
 
   if (hashPwError) return res.status(500).json({ message: hashPwError });
 
-  const response = await UserDB.create(role, email, hashPwResponse.hashed);
+  const response = await UserDB.create(email, hashPwResponse.hashed, role);
   const error = response.error;
 
   if (error)
@@ -51,7 +31,7 @@ const addTenant = async ({ body: { userId, tenantId, homeId } }, res) => {
   const response = await UserDB.addTenant(tenantId, homeId);
   const error = response.error;
 
-  if (user.role === `Tenant`)
+  if (user.role === `1`)
     return res.status(403).json({ message: `you can't create accommodation` });
 
   return res
@@ -82,18 +62,21 @@ const signIn = async ({ body: { email, password } }, res) => {
   const userID = user.id;
   const pwBD = user.password;
   const userEmail = user.email;
+  const userRole = user.id_role;
 
   const arePwSame = await compareHash(password, pwBD);
 
-  if (!arePwSame)
+  if (!arePwSame) {
     return res
       .status(401)
       .json({ message: `Authentication failed, check mail and password.` });
+  }
 
   const token = jwtSign(userID);
+
   return res.status(200).json({
     message: `Authentication succeeded`,
-    user: { userID, userEmail, token },
+    user: { userID, userEmail, userRole, token },
   });
 };
 

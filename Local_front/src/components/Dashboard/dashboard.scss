@@ -1,49 +1,59 @@
+@use "../../styles/mixins" as mxn;
+
 .dashboard {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-}
+  @include mxn.container;
+  background-size: 900px;
 
-.dashboard h2 {
-  font-size: 24px;
-  margin-bottom: 20px;
-}
+  @media screen and (min-width: 767px) {
+    background-position: left -280px top 120px;
 
-.dashboard nav ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
+    h2 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
 
-.dashboard nav ul li {
-  display: inline-block;
-  margin-right: 10px;
-}
+    .error_red {
+      color: red;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
 
-.dashboard nav ul li a {
-  text-decoration: none;
-  color: #333;
-}
+    .house-list {
+      .house {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        margin-bottom: 10px;
 
-.dashboard nav ul li a:hover {
-  color: #000;
-}
+        .details {
+          p {
+            margin: 5px 0;
+            font-size: 16px;
+          }
+        }
 
-.dashboard h3 {
-  font-size: 20px;
-  margin-top: 20px;
-}
+        .btns {
+          display: flex;
+          justify-content: flex-end;
 
-.dashboard ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
+          button {
+            margin-left: 10px;
+          }
+        }
+      }
+      .error_red {
+        color: var(--error);
+        font-weight: var(--semi-bold);
+        font-size: var(--font-size-s);
+        text-align: center;
+      }
 
-.dashboard ul li {
-  margin-bottom: 10px;
-}
-
-.dashboard ul li:last-child {
-  margin-bottom: 0;
+      .success-message {
+        color: var(--success);
+        font-weight: var(--semi-bold);
+        font-size: var(--font-size-s);
+        text-align: center;
+      }
+    }
+  }
 }

@@ -6,14 +6,13 @@ const initDocRoutes = (app) => {
   const docRouter = express.Router();
 
   //GET
-  docRouter.get("/all", jwtMddlwr, DocController.readAllDoc);
+  docRouter.get("/all", DocController.readAllDoc);
 
   // POST
-  docRouter.post("/insert", jwtMddlwr, DocController.create);
-  docRouter.post("/insert/:type/:homeId/:tenantId", jwtMddlwr, DocController.create);
+  docRouter.post("/", jwtMddlwr, DocController.createDoc);
 
   // DELETE
-  docRouter.delete("/:id", jwtMddlwr, DocController.deleteOne);
+  docRouter.delete("/:doc_id", DocController.deleteOne);
 
   // Attaching router to /doc path
   app.use("/doc", docRouter);

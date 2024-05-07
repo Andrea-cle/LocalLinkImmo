@@ -1,22 +1,18 @@
-// Importer le module de gestion des doc depuis la base de données
-import { DocDB } from "../databases/doc.db.js"; 
-// Permet le traitement des fichiers
-import formidable from "formidable"; 
+import { DocDB } from "../databases/doc.db.js"; // importe le module de gestion des doc depuis la base de données
+import formidable from "formidable"; // Permet le traitement des fichiers
 
-// Fonction pour créer les documents
-const create = async (req, res) => {
-
+//Fonction pour créer les documents
+const createDoc = async (req, res) => {
   // Extrait les paramètres de la requête
   const { type, homeId, tenantId } = req.params;
 
-  // Permet de construire le chemin d'enregistremennt du document
+  //Permet de construire le chemin d'enregistrement des document
   const url = `./src/documents/${type}/${homeId}/${tenantId}`;
 
   const form = formidable({
     uploadDir: url,
     keepExtensions: true,
     createDirsFromUploads: true,
-    // Filtrer les types de fichiers 
     filter: (opts) => {
       const { mimetype } = opts;
       if (mimetype !== "application/pdf") return false;
@@ -30,13 +26,10 @@ const create = async (req, res) => {
   } catch (err) {
     console.log("err =>", err.message);
   }
-  console.log(files)
-  // Vérifie si un fichier est téléchargé
   if (!files.doc)
     return res.status(415).json({ message: `Unsupported Media Type` });
 
-    // Créer un document dans la base de donnée
-  const docResult = await DocDB.createDoc(url, userId, tenantId, homeId);
+  const docResult = await DocDB.createDoc(url, type, tenantId, homeId);
   const response = docResult.response;
 
   return res
@@ -44,10 +37,8 @@ const create = async (req, res) => {
     .json({ message: `Request processed successfully and document created.` });
 };
 
-// Permet de lire tous les docs
-const readAllDoc = async (req, res) => {
-  const userId = req.body.userID;
-  const response = await DocDB.readAllDoc(userId);
+const readAllDoc = async ({ params: { documents } }, res) => {
+  const response = await DocDB.readAllDoc(documents);
 
   const { result, error } = response;
 
@@ -56,7 +47,6 @@ const readAllDoc = async (req, res) => {
     result,
   });
 };
-
 
 const deleteOne = async ({ params: { doc_id } }, res) => {
   const response = await DocDB.deleteOne(doc_id);
@@ -69,7 +59,7 @@ const deleteOne = async ({ params: { doc_id } }, res) => {
 };
 
 export const DocController = {
-  create,
+  createDoc,
   readAllDoc,
   deleteOne,
 };

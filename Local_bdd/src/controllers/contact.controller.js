@@ -1,7 +1,5 @@
 import { ContactDB } from "../databases/contact.db.js";
-// import isEmail from "validator/lib/isEmail.js";
 import { areStringsFilled } from "../utils/string.utils.js";
-// INSERT DELETE UPDATE READ
 
 // requete pour insérer un contact
 const insertedContact = async ({ body: { email, subject, comment } }, res) => {
@@ -36,11 +34,6 @@ const insertedContact = async ({ body: { email, subject, comment } }, res) => {
       .json({ message: `Erreur lors de l'insertion du contact` });
   }
   res.status(200).json({ message: `Contact créé avec succès`, addContact });
-
-  // // Gestion des erreurs non prévues
-  // return res
-  //   .status(500)
-  //   .json({ message: `Erreur inattendue lors de la création` });
 };
 
 // requete pour sélectionner tous les messages non lus
@@ -74,14 +67,15 @@ const selectReadMessage = async (req, res) => {
 
 // requete pour selectionner 1 message en fontion de son id
 const selectIdMessage = async (req, res) => {
-  const { error, result: readIdMessage } = await ContactDB.idMessage();
+  const messageId = req.params.id;
+
+  const { error, result: readIdMessage } = await ContactDB.idMessage(messageId);
 
   if (error)
     return res.status(500).json({
-      message: `Erreur lors de la sélection des identifiants des messages : ${error}`,
+      message: `Erreur lors de la sélection du message par son ID : ${error}`,
     });
   res.status(200).json({
-    message: `Sélection de tous les identifiants des messages réussie`,
     readIdMessage,
   });
 };
@@ -90,17 +84,15 @@ const selectIdMessage = async (req, res) => {
 
 const updateMessageStatut = async (req, res) => {
   // recupére l'identifiant du message depuis les paramètres de la requête
-  const messageId = req.params.messageId;
+  const messageId = req.params.id;
 
-  const { error, result: selectMessageId } = await ContactDB.updateStatut(
-    messageId
-  );
+  const { error, result } = await ContactDB.updateStatut(messageId);
 
   if (error) {
     // En cas d'erreur lors de la mise à jour du statut, renvoyer une réponse avec le code d'erreur approprié
     return res.status(500).json({
       message: `Erreur lors de la mise à jours du statut du message : ${error}`,
-      selectMessageId,
+      error,
     });
   }
   res.status(200).json({
@@ -110,21 +102,19 @@ const updateMessageStatut = async (req, res) => {
 
 // requete pour supprimer 1 message
 const removeMessage = async (req, res) => {
-  const messageId = req.params.messageId;
+  const messageId = req.params.id;
 
-  const { error, result: deleteMessageId } = await ContactDB.deleteMessage(
-    messageId
-  );
+  const { error, result } = await ContactDB.deleteMessage(messageId);
 
   if (error) {
     return res.status(500).json({
-      message: `Erreur lors de la mise à jour du statut du message : ${error}`,
-      deleteMessageId,
+      message: `Erreur lors de la suppression du message : ${error}`,
+      error,
     });
   }
 
   res.status(200).json({
-    message: `Status du message mis à jour avec succès`,
+    message: `Le message à été supprimé avec succès`,
   });
 };
 

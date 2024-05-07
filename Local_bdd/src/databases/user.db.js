@@ -1,17 +1,21 @@
 import query from "./init.db.js";
 
-// Création du compte utilisateur
-const create = async (role, email, password) => {
+// Création du compte
+const create = async (email, password, role) => {
   const sql = `
-    INSERT INTO user (role, email, password)
-    VALUES (?, ?, ?)
-  `;
+    INSERT INTO user (email, password, id_role)
+    VALUES(?, ?, ?)
+    `;
+
+  // console.log("INSERT INTO : " + role);
+  // console.log("INSERT INTO : " + email);
+  // console.log("INSERT INTO : " + password);
 
   let error = null;
   let result = null;
 
   try {
-    result = await query(sql, [role, email, password]);
+    result = await query(sql, [email, password, role]);
   } catch (err) {
     error = err.message;
   } finally {
@@ -19,18 +23,18 @@ const create = async (role, email, password) => {
   }
 };
 
-// Ajout d'un locataire sur un logement existant
-const addTenant = async (userId, homeId) => {
+// rajouter un locataire sur un logement existant
+const addTenant = async (homeId, tenantId) => {
   const sql = `
-    INSERT INTO user_home (home_id, user_id)
-    VALUES (?, ?)
+  INSERT INTO user_home (home_id, user_id)
+  VALUES (?, ?)
   `;
 
   let error = null;
   let result = null;
 
   try {
-    result = await query(sql, [homeId, userId]);
+    result = await query(sql, [homeId, tenantId]);
   } catch (err) {
     error = err.message;
   } finally {
@@ -38,18 +42,18 @@ const addTenant = async (userId, homeId) => {
   }
 };
 
-// Lecture des informations d'un utilisateur
-const readOne = async (userID) => {
+// Lecture du compte (a vérifier si je garde)
+const readOne = async (id) => {
   const sql = `
-    SELECT id, role, email
-    FROM user
-    WHERE id = ?
-  `;
+  SELECT id, role, email, password
+  FROM user
+  WHERE id =?
+    `;
 
   let result = null;
   let error = null;
   try {
-    result = await query(sql, [userID]);
+    result = await query(sql, [id]);
   } catch (err) {
     error = err.message;
   } finally {
@@ -57,13 +61,12 @@ const readOne = async (userID) => {
   }
 };
 
-// Lecture des informations d'un utilisateur par email
+// Nouvel accés au compte avec email
 const readByEmail = async (email) => {
   const sql = `
-    SELECT id, email, password
+    SELECT id, email, password, id_role
     FROM user
-    WHERE email = ?
-  `;
+    WHERE email = ?`;
 
   let error = null;
   let result = null;
@@ -76,39 +79,38 @@ const readByEmail = async (email) => {
   }
 };
 
-// Mise à jour du mot de passe d'un utilisateur
+// MAJ du mot de passe
 const updatePassword = async (newPassword, id) => {
   const sql = `
     UPDATE user 
     SET password = ?
     WHERE id = ?
-  `;
+    `;
 
   let result = null;
   let error = null;
   try {
     result = await query(sql, [newPassword, id]);
     if (result.changeRows !== 1)
-      throw new Error(`Une erreur s'est produite, vous ne pouvez pas changer le mot de passe`);
+      throw new Error(`An error has occurred, you cannot change the password`);
   } finally {
     return { result, error };
   }
 };
 
-// Mise à jour de l'adresse e-mail d'un utilisateur
+// MAJ de l'adresse mail
 const updateEmail = async (newEmail, id) => {
   const sql = `
-    UPDATE user
-    SET email = ? 
-    WHERE id = ?
-  `;
+  UPDATE user
+  SET email= ? 
+  WHERE id= ?`;
 
   let result = null;
   let error = null;
   try {
     result = await query(sql, [newEmail, id]);
     if (result.changeRows !== 1)
-      throw new Error(`Une erreur s'est produite, vous ne pouvez pas modifier l'e-mail`);
+      throw new Error(`An error has occurred, you cannot modify the email`);
   } catch (err) {
     error = err.message;
   } finally {
@@ -116,11 +118,11 @@ const updateEmail = async (newEmail, id) => {
   }
 };
 
-// Suppression du compte utilisateur
+// Suppression du compte
 const deleteOne = async (id) => {
   const sql = `
-    DELETE FROM user
-    WHERE id = ?
+  DELETE FROM user
+  WHERE id = ?
   `;
 
   let result = null;
@@ -128,7 +130,7 @@ const deleteOne = async (id) => {
   try {
     result = await query(sql, [id]);
     if (result.changeRows !== 1)
-      throw new Error(`Une erreur s'est produite, vous ne pouvez pas supprimer le compte`);
+      throw new error(`An error has occurred, you cannot delete the account`);
   } catch (err) {
     error = err.message;
   } finally {

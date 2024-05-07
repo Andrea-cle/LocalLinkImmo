@@ -1,130 +1,86 @@
-import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+// Import de la fonction useNavigate pour la navigation
 import "./dashboard.scss";
-import { getRequest, postRequest } from "../../api/api";
-import { APP_ROUTES } from "../../constants/route.const";
+import { getRequest, deleteRequest } from "../../api/api";
 import Button from "../Button/Button";
-import DocumentsData from "../Documents/DocumentsData";
 
-const Dashboard = ({ userId }) => {
+const Dashboard = () => {
+  const [homes, setHomes] = useState([]);
+  const [errors, setErrors] = useState(null);
   const navigate = useNavigate();
-  const [docData, setDocumentData] = useState(null);
-  const [userData, setUserData] = useState(null);
-  const [userAccessData, setUserAccessData] = useState(null);
-  const getToken = localStorage.getItem(`token`);
-  const token = JSON.parse(getToken);
 
-  // Ajouter un état pour stocker le fichier sélectionné
-  const [selectedFile, setSelectedFile] = useState(null);
+  useEffect(() => {
+    const role = JSON.parse(window.localStorage.getItem("Role"));
+    if (role !== 2 && role !== 3) {
+      navigate("/");
+    } else {
+      fetchHomes();
+    }
+  }, []);
 
-  const handleDisconnect = () => {
-    localStorage.clear();
-    navigate(APP_ROUTES.SIGN_IN, { replace: true });
-  };
-
-  // Fonction pour gérer le changement de fichier
-  const handleFileChange = (event) => {
-    setSelectedFile(event.target.files[0]);
-  };
-
-  const handleSubmitInsurance = async (event) => {
-    event.preventDefault();
-  };
-
-  const handleSubmitLease = async (event) => {
-    event.preventDefault();
-
+  const fetchHomes = async () => {
     try {
-      const formData = new FormData();
-      formData.append("file", selectedFile);
-
-      // Envoyer le fichier au serveur
-      const response = await postRequest("/doc/insert", formData, token);
-
-      // Mettre à jour l'état ou afficher un message de succès
+      const response = await getRequest("/home");
+      if (response.status === 200) {
+        setHomes(response.result.homes);
+      } else {
+        setErrors(
+          "Une erreur s'est produite lors de la récupération des maisons."
+        );
+      }
     } catch (error) {
-      console.error("Erreur lors de l'envoi du document :", error);
-      // Afficher un message d'erreur à l'utilisateur si nécessaire
+      setErrors("Erreur de communication avec le serveur.");
     }
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        // Récupérer les données de tous les documents
+  const handleDeleteHouse = async (houseId) => {
+    // Vérification du rôle avant de supprimer la maison
+    const role = JSON.parse(window.localStorage.getItem("Role"));
+    if (role !== 2) {
+      // Si l'utilisateur n'a pas le rôle 2, ne pas permettre la suppression
+      setErrors("Vous n'avez pas les autorisations nécessaires.");
+      return;
+    }
 
-        const docResponse = await getRequest(`/doc/all`, token);
-
-        const docData = docResponse.result.result;
-        setDocumentData(docData);
-        // Récupérer les données de l'utilisateur par son ID
-
-        const userResponse = await getRequest(`/user/read`, token);
-        const userData = userResponse.result.result[0];
-        setUserData(userData);
-      } catch (error) {
-        console.error("Erreur lors de la récupération des données :", error);
+    try {
+      const response = await deleteRequest(`/home/${houseId}`);
+      if (response.status === 200) {
+        setHomes(homes.filter((house) => house.id !== houseId));
+      } else {
+        setErrors(
+          "Une erreur s'est produite lors de la suppression de la maison."
+        );
       }
-    };
+    } catch (error) {
+      setErrors("Erreur de communication avec le serveur.");
+    }
+  };
 
-    fetchData();
-  }, []);
-
-  // useEffect(() => console.log(userData), [userData]);
   return (
-    <div className="dashboard">
-      <i className="fa-solid fa-keyboard" />
-      <h1>Dashboard</h1>
-      <Button onClick={handleDisconnect} text={"Déconnexion"} />
-      {/* Affichage des documents associés */}
-      <h2>Documents associés :</h2>
-      <ul>
-        {Array.isArray(docData) &&
-          docData.map((document) => (
-            <li key={document.id}>
-              Nom : {document.name}, Type : {document.type}
-            </li>
-          ))}
-      </ul>
-
-      {/* Link pour naviguer vers la liste des documents */}
-      <Link to="/doc">Voir la liste des documents</Link>
-
-      {/* Affichage des informations utilisateur */}
-      <h2>Informations utilisateur :</h2>
-      {userData && (
-        <div>
-          <p>Email : {userData.email}</p>
-          {/* Ajoutez d'autres informations utilisateur si nécessaire */}
-        </div>
-      )}
-
-      {/* Affichage des données d'accès utilisateur */}
-      <h2>Accès utilisateur :</h2>
-      {userAccessData && (
-        <div>{/* Affichage des données d'accès utilisateur */}</div>
-      )}
-
-      {/* Link pour naviguer vers la liste des utilisateurs */}
-      <Link to={`/user ${userId}`}>Voir la liste des utilisateurs</Link>
-
-      {/* Formulaire pour télécharger un document */}
-      {userData && userData.role === "owner" && (
-        <form onSubmit={handleSubmitLease}>
-          <input type="file" onChange={handleFileChange} />
-          <button type="submit">Ajouter un bail</button>
-        </form>
-      )}
-      {userData && userData.role === "tenant" && (
-        <form onSubmit={handleSubmitInsurance}>
-          <input type="file" onChange={handleFileChange} />
-          <button type="submit">Ajouter une assurance</button>
-        </form>
-      )}
-      {/* <form onSubmit={handleSubmit}>
-        <input type="file" onChange={handleFileChange} />
-        <button type="submit">Ajouter</button>
-      </form> */}
+    <div className="dashboard-admin">
+      <h2>Tableau de bord administrateur</h2>
+      {errors && <p className="error_red">{errors}</p>}
+      <div className="house-list">
+        {homes.map((house) => (
+          <div key={house.id} className="house">
+            <div className="details">
+              <p>ID : {house.id}</p>
+              <p>Adresse : {house.address}</p>
+              <p>ID Propriétaire : {house.id_user_owner}</p>
+            </div>
+            <div className="btns">
+              {role === 2 && ( // Afficher le bouton de suppression uniquement pour le rôle 2
+                <Button
+                  type={"submit"}
+                  text={"Supprimer"}
+                  onClick={() => handleDeleteHouse(house.id)}
+                />
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

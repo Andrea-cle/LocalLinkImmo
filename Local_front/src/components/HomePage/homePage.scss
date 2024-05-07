@@ -13,19 +13,4 @@
     @include mxn.flex("column", "nowrap");
     margin-bottom: 3rem;
   }
-
-  h3 {
-    padding-top: 40px;
-    padding-bottom: 40px;
-    text-align: center;
-  }
-
-  article {
-    display: grid;
-    justify-content: center;
-  }
-  p {
-    text-align: center;
-    justify-content: center;
-  }
 }

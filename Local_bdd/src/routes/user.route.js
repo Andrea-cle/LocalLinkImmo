@@ -5,19 +5,19 @@ import jwtMddlwr from "../middlewares/jwt.mddlwrs.js";
 const initUserRoutes = (app) => {
   const userRouter = express.Router();
 
-  // GET
+  // // GET
   userRouter.get("/read", jwtMddlwr, UserController.readOne);
 
   // POST
   userRouter.post("/create", UserController.createOneUser);
-  userRouter.post("/add_tenant", jwtMddlwr, UserController.addTenant); 
-  userRouter.post("/sign-in", jwtMddlwr, UserController.signIn);
+  userRouter.post("/addtenant", jwtMddlwr, UserController.addTenant);
+  userRouter.post("/sign-in", UserController.signIn);
 
   // PUT
   userRouter.put("/password", jwtMddlwr, UserController.updatePassword);
 
   // DELETE
-  userRouter.delete("/:id", jwtMddlwr, UserController.deleteUserAndAllData); 
+  userRouter.delete("/id", jwtMddlwr, UserController.deleteUserAndAllData);
 
   // lié le router à /user
   app.use("/user", userRouter);

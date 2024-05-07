@@ -80,7 +80,8 @@ const idMessage = async (id) => {
 };
 
 // requete pour modifier le statut d'un message passer de 0 à 1
-const updateStatut = async (newStatut, id) => {
+const updateStatut = async (messageId) => {
+  console.log("db", messageId);
   const sql = `
 UPDATE contact 
 SET statut = 1
@@ -91,7 +92,7 @@ WHERE id = ?
   let error = null;
 
   try {
-    result = await query(sql, [newStatut, id]);
+    result = await query(sql, [messageId]);
   } catch (err) {
     error = err.message;
   } finally {
